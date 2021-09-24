@@ -1,5 +1,17 @@
 .adminMain {
   display: flex;
+  .message {
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+
+    color: #fcfcfc;
+    background-color: #cf2e2e;
+    border-radius: 5px;
+  }
   main {
     flex: 4;
     & > div {

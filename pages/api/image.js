@@ -14,8 +14,9 @@ const apiRoute = connect
     res.status(200).json({ imageUrl: `/images/${image}` });
   })
   .delete((req, res) => {
-    const { imageName } = req.body;
-    res.status(200).json({ imageUrl: `/images/${imageName}` });
+    const { imageurl } = req.body;
+    console.log(imageurl);
+    res.status(200).json({ imageUrl: `/images/${imageurl}` });
   });
 
 export default apiRoute;

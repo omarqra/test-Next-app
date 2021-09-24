@@ -32,15 +32,14 @@ class Model {
 
   async creatTable() {
     const creat = async () => {
+      console.log(`creating ${this.table} table`);
       try {
-        await this.db(`SELECT * FROM ${this.table}`, undefined, true);
+        const result = await this.db(
+          `CREATE TABLE ${this.table} (${this.colons})`
+        );
+        return result;
       } catch (error) {
-        if (error.sqlState === "42S02") {
-          const result = await this.db(
-            `CREATE TABLE ${this.table} (${this.colons})`
-          );
-          return result;
-        } else console.log(error);
+        return console.log(`creating ${this.table} table error ::`, error);
       }
 
       // try {

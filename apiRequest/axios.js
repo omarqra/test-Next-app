@@ -6,3 +6,5 @@ export const UploadImage = (data) =>
   axios.post("/api/image", data, {
     headers: { "content-type": "multipart/form-data" },
   });
+export const deteteWriter = (WriterID) =>
+  axios.delete(`/api/writers/${WriterID}`);

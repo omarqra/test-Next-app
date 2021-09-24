@@ -31,17 +31,17 @@ const SideBare = () => {
         <ul>
           <FaLock />
           <li>
-            <Link href="/admin_Panel">
+            <Link href="/writer">
               <a>الصفحة الرئيسية</a>
             </Link>
           </li>
           <li>
-            <Link href="/Writer/writing_tools/add">
+            <Link href="/writer/add">
               <a>مقالة جديدة</a>
             </Link>
           </li>
           <li>
-            <Link href="/Writer/writing_tools/update">
+            <Link href="/writer/writing_tools/update">
               <a> تعديل او حذف مقال</a>
             </Link>
           </li>

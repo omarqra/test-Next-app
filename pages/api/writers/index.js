@@ -1,43 +1,40 @@
-import Writers from "../../db/writers";
-import connect from "../../middleware/connect";
+import Writers from "../../../db/writers";
+import connect from "../../../middleware/connect";
 import bcrypt from "bcrypt";
 
 const apiRoute = connect
   .get(async (req, res) => {
-    console.log("haloo");
     try {
       const allwriters = await Writers.find();
-      res.status(200).json({ allwriters });
+      res.status(200).json(allwriters);
     } catch (error) {
       res.status(500).json({ message: `حدث مشكلة اثناء اضافة الكاتب` });
     }
   })
   .post(async (req, res) => {
-    const { name, password, imageUrl } = req.body;
+    const { writer_Image, writer_name, writer_password } = req.body;
     if (
-      name === "" ||
-      !name ||
-      password === "" ||
-      !password ||
-      imageUrl === "" ||
-      !imageUrl
+      writer_name === "" ||
+      !writer_name ||
+      writer_password === "" ||
+      !writer_password ||
+      writer_Image === "" ||
+      !writer_Image
     ) {
       return res.status(406).json({ message: `هنالك معلومات ناقصة` });
     }
     try {
-      const hashedpassword = await bcrypt.hash(password, 12);
+      const hashedpassword = await bcrypt.hash(writer_password, 12);
       await Writers.save({
-        name,
+        name: writer_name,
         password: hashedpassword,
-        imageUrl,
+        imageUrl: writer_Image,
       });
       res.status(200).json({ message: `تم إضافة الكاتب` });
     } catch (error) {
+      console.log(error);
       res.status(500).json({ message: `حدث مشكلة اثناء اضافة الكاتب` });
     }
-  })
-  .delete((req, res) => {
-    res.status(200).json({ imageUrl: `تم حذف الكاتب` });
   });
 
 export default apiRoute;
