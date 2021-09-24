@@ -1,0 +1,43 @@
+.homePackgroundDiv {
+    position: relative;
+}
+.homePackground {
+    padding: 16px 0 50px 0;
+    width: 100%;
+    height: 35vh;
+}
+.PrgOnImg {
+    position: absolute;
+    z-index: 1;
+    width: 70%;
+    font-size: 12px;
+    background-color: red;
+    color: white;
+    text-align: center;
+    margin: 0;
+    bottom: 0;
+    left: 15%;
+    transform: translate(0,-60%);
+    padding: 12px 35px;
+}
+
+.detailsLinks {
+    display: block;
+    margin: auto;
+    background-color: #0060e0;
+    color: white;
+    text-align: center;
+    padding: 13px 0;
+}
+
+.homeSideAndTopics{
+    position: relative;
+}
+
+@media screen and (min-width: 600px) {
+    .PrgOnImg {
+        width: 300px;
+        left: 5vw;
+        font-size: 16px;
+    }
+}
