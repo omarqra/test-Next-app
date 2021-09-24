@@ -1,0 +1,11 @@
+.topicsList {
+    list-style: none;
+    padding: 0;
+}
+
+@media screen and (min-width: 1024px) {
+    .topicsList {
+        display: inline-block;
+        width: 74%;
+    }
+}
