@@ -1,0 +1,36 @@
+.nav{
+    background-color: #444;
+}
+.container {
+    width: 90%;
+    margin: auto;
+}
+.navContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+.navContentHeader {
+    padding: 0;
+    margin: 0;
+}
+.dropdown{
+    position: relative;
+    padding: 20px;
+}
+.dropdownList {
+    list-style: none;
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+    background-color: #666;
+    left: -10px;
+    top: 45px;
+}
+.dropdown:hover .dropdownList {
+    display: block;
+}

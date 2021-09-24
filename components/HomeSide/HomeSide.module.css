@@ -1,0 +1,44 @@
+.homeSide{ 
+    display: none;
+    width: 24%;
+    margin-right: 2%;
+    background-color: white;
+    position: absolute;
+    top:0;
+    bottom: 0;
+}
+.socialList {
+    padding: 10px 30px 0 0;
+}
+.linksList {
+    margin-top: 80px;
+    padding: 0;
+}
+.socialList, .linksList{
+    list-style: none;
+}
+.socialList li {
+    padding: 7px 0;
+    color: darkblue;
+    text-decoration: underline;
+    text-align: center;
+    line-height:30px ;
+    font-weight: 500;
+}
+.socialList li img{
+    width: 30px;
+    float: right;
+    border-radius: 6px;
+}
+.link {
+    display: block;
+    padding: 18px 0;
+    margin: 5px 2px;
+    background-color: #dedede;
+    text-align: center;
+}
+@media screen and (min-width: 1024px) {
+    .homeSide{ 
+        display: inline-block;
+    }    
+}
