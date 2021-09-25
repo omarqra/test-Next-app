@@ -1,7 +1,9 @@
 import Link from "next/link";
+import Footer from "../components/Footer/Footer";
 import HomeSide from "../components/HomeSide/HomeSide";
 import TopicsList from "../components/Topics/TopicsList";
 import classes from "../styles/homePage.module.css";
+
 const StaticTopics = [
     {
         id: 1,
@@ -26,7 +28,7 @@ const StaticTopics = [
 ]
 
 const Home = () => {
-    console.log(StaticTopics[0].imgSrc);
+    
     return (
     <div>
         <div className={classes.homePackgroundDiv}>
@@ -39,6 +41,7 @@ const Home = () => {
             <HomeSide />
         </div>
         <Link href="/"><a className={classes.detailsLinks}>المزيد</a></Link>
+        <Footer />
     </div>
     )
 }
