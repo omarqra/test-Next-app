@@ -2,6 +2,7 @@ import React from "react";
 import style from "./sidebar.module.scss";
 import { FaLock, FaBars } from "react-icons/fa";
 import Link from "next/link";
+import { FaHome } from "react-icons/fa";
 
 const SideBare = () => {
   return (
@@ -47,7 +48,9 @@ const SideBare = () => {
           </li>
           <li>
             <Link href="/">
-              <a>العودة للموقع</a>
+              <a>
+                <FaHome /> العودة للموقع
+              </a>
             </Link>
           </li>
         </ul>
