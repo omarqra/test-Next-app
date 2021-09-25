@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../styles/sidebar.module.scss";
+import style from "./sidebar.module.scss";
 import { FaLock, FaBars } from "react-icons/fa";
 import Link from "next/link";
 
@@ -43,6 +43,11 @@ const SideBare = () => {
           <li>
             <Link href="/writer/writing_tools/update">
               <a> تعديل او حذف مقال</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/">
+              <a>العودة للموقع</a>
             </Link>
           </li>
         </ul>

@@ -1,7 +1,7 @@
 import Head from "next/head";
 import style from "../../styles/Home.module.scss";
 import { useEffect, useRef, useState } from "react";
-import SideBare from "../../components/sideBare";
+import SideBare from "../../components/sideBare/sideBare";
 import {
   addWriter,
   deleteImage,

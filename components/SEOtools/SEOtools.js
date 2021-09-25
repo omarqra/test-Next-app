@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import style from "../styles/seotools.module.scss";
+import style from "./seotools.module.scss";
 
 export const SEOtools = () => {
   const [keyWorld, setkeyWorld] = useState("");
