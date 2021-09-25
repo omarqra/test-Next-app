@@ -15,9 +15,14 @@ const Editor = dynamic(
   },
   { ssr: false }
 );
+let htmlContent = "";
+let RowsContent = [];
+let contentlength = 0;
 
 export default function ADD() {
   const [editorState, seteditorState] = useState(EditorState.createEmpty());
+  const [keyWorld, setkeyWorld] = useState("");
+  const [contentWorlds, setcontentWorlds] = useState(0);
   const message = useRef(null);
   const setMessage = (M, good) => {
     message.current.style.padding = "20px";
@@ -31,7 +36,11 @@ export default function ADD() {
 
   const onEditorStateChange = (editorState) => {
     seteditorState(editorState);
-    console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())));
+    RowsContent = convertToRaw(editorState.getCurrentContent());
+    htmlContent = draftToHtml(RowsContent);
+    if (RowsContent.blocks) {
+      countWorlds();
+    }
   };
 
   const uploadImageCallBack = async (file) => {
@@ -50,6 +59,46 @@ export default function ADD() {
     }
   };
 
+  const chack_H1_For_keyworld = () => {
+    let status = false;
+    if (RowsContent.blocks) {
+      RowsContent.blocks.forEach((item) => {
+        if (item.type === "header-one") {
+          if (item.text.indexOf(keyWorld) !== -1) {
+            status = true;
+          }
+        }
+      });
+    }
+    return status;
+  };
+  const chack_p_For_keyworld = () => {
+    let status = false;
+    if (RowsContent.blocks) {
+      RowsContent.blocks.forEach((item) => {
+        if (item.type === "unstyled") {
+          if (item.text.indexOf(keyWorld) !== -1) {
+            status = true;
+          }
+        }
+      });
+    }
+    return status;
+  };
+
+  const countWorlds = () => {
+    if (RowsContent.blocks) {
+      let alltexts = "";
+      RowsContent.blocks.forEach((item) => {
+        alltexts = alltexts.concat(` ${item.text} `);
+      });
+      let str1 = alltexts;
+      str1 = str1.replace(/(^\s*)|(\s*$)/gi, "");
+      str1 = str1.replace(/[ ]{2,}/gi, " ");
+      str1 = str1.replace(/\n /, "\n");
+      setcontentWorlds(str1.split(" ").length);
+    }
+  };
   return (
     <div className={style.textEditer}>
       <span
@@ -66,8 +115,17 @@ export default function ADD() {
         <meta name="keywords" content="اضافة مقالة , مقالة" />
       </Head>
       <SideBare />
-      <main>
-        <SEOtools />
+      <main
+        onKeyUp={(e) => {
+          if (e.keyCode === 13) {
+            countWorlds(e);
+          }
+        }}
+        onFocus={(e) => {
+          countWorlds(e);
+        }}
+      >
+        <SEOtools keyWorld={keyWorld} setkeyWorld={setkeyWorld} />
         <Editor
           editorState={editorState}
           toolbarClassName={style.toolbar_class}
@@ -84,6 +142,31 @@ export default function ADD() {
             },
           }}
         />
+        <ul>
+          <li>
+            {htmlContent.indexOf("<h1>") === -1
+              ? "يجب عليك إضافة H1"
+              : "قمت بإضافة H1"}
+          </li>
+          <li>
+            {chack_H1_For_keyworld()
+              ? `الكلمة المفتاحية ${keyWorld} مستخدمة موجودة في H1`
+              : `الكلمة المفتاحية ${keyWorld} غير موجودة في H1`}
+          </li>
+          <li>
+            {contentlength === 0 ? `يجب إضافة نص إلى المقال` : `اضفت نص للمقال`}
+          </li>
+          <li>
+            {contentWorlds < 150
+              ? `عدد الكلمات في المقال قليل جداً، عدد الكلمات الأدنى 300 حرف`
+              : `عدد كلمات المقال ${contentWorlds}`}
+          </li>
+          <li>
+            {contentWorlds < 150
+              ? `الكلمة الرئيسية ${keyWorld} لا تظهر في الفقرة الأولى للمقال`
+              : `عدد كلمات المقال ${contentWorlds}`}
+          </li>
+        </ul>
       </main>
     </div>
   );
