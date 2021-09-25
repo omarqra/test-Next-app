@@ -6,8 +6,8 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import style from "../../../styles/textEditer.module.scss";
 import { UploadImage } from "../../../apiRequest/axios";
 import draftToHtml from "draftjs-to-html";
-import SideBare from "../../../components/sideBare";
-import { SEOtools } from "../../../components/SEOtools";
+import SideBare from "../../../components/sideBare/sideBare";
+import { SEOtools } from "../../../components/SEOtools/SEOtools";
 
 const Editor = dynamic(
   () => {
