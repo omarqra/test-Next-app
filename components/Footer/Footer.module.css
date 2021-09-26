@@ -1,0 +1,104 @@
+.footer {
+    margin-top: 30px;
+    padding: 20px 15px;
+    background-color: white;
+}
+.socialDiv {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+.socialImg{
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    margin: 0 10px;
+}
+.aboutList {
+    margin: 10px 0;
+}
+    .aboutList * {
+        display: inline-block;
+        text-align: center;
+        width: 50%;
+        font-size: 13px;
+        padding: 5px ;
+    }
+    .aboutList *:nth-child(3) {
+        position: relative;
+    }
+    .aboutList *:nth-child(3)::after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 1px;
+        height: 130%;
+        background-color: #333;
+        left: 0;
+        bottom: 35%;
+    }
+    .aboutList *:nth-child(1),.aboutList *:nth-child(2) {
+        position: relative;
+    }
+    .aboutList *:nth-child(1)::after,.aboutList *:nth-child(2)::after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 80%;
+        height: 1px;
+        background-color: #333;
+        left: 10%;
+        bottom: -3px;
+    }
+
+.copyRight {
+    display: block;
+    text-align: center;
+    font-size: 10px;
+}    
+
+@media screen and (min-width: 768px) {
+    .socialDiv {
+        width:30%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .socialImg {
+        margin: 10px;
+    }
+    .footerLists {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+    .aboutList {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-left: 2px solid #222;
+    }
+    .aboutList * {
+        font-size: 18px;
+        width: auto;
+    }
+    .aboutList *:not([last="last"]){
+        position: relative;
+        margin-bottom:5px ;
+    }
+    .aboutList *:not([last="last"])::after{
+        content: "";
+        display: block;
+        position: absolute;
+        width: 90%;
+        height: 1px;
+        background-color: #333;
+        left: 5%;
+        bottom: -3px;
+    }
+    .copyRight{
+        font-size: 14px;
+    }
+}

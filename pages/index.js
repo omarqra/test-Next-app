@@ -1,7 +1,9 @@
 import Link from "next/link";
+import Footer from "../components/Footer/Footer";
 import HomeSide from "../components/HomeSide/HomeSide";
 import TopicsList from "../components/Topics/TopicsList";
 import classes from "../styles/homePage.module.css";
+
 const StaticTopics = [
   {
     id: 1,
@@ -25,27 +27,20 @@ const StaticTopics = [
   },
 ];
 
-const Home = () => {
+const Home = () => {  
   return (
-    <div>
-      <div className={classes.homePackgroundDiv}>
-        <img
-          className={classes.homePackground}
-          src="http://www.hdwallpaperspulse.com/wp-content/uploads/2015/05/30/art-desktop-luxury-wallpapers.jpg"
-          alt="home image"
-        />
-        <p className={classes.PrgOnImg}>اعرف أكثر عن المشروع</p>
-      </div>
-      <Link href="/">
-        <a className={classes.detailsLinks}>الأكثر زيارة</a>
-      </Link>
-      <div className={classes.homeSideAndTopics}>
-        <TopicsList topics={StaticTopics} />
-        <HomeSide />
-      </div>
-      <Link href="/">
-        <a className={classes.detailsLinks}>المزيد</a>
-      </Link>
+       <div>
+        <div className={classes.homePackgroundDiv}>
+            <img className={classes.homePackground} src="http://www.hdwallpaperspulse.com/wp-content/uploads/2015/05/30/art-desktop-luxury-wallpapers.jpg" alt="home image" />
+            <p className={classes.PrgOnImg}>اعرف أكثر عن المشروع</p>
+        </div>
+        <Link href="/"><a className={classes.detailsLinks}>الأكثر زيارة</a></Link>
+        <div className={classes.homeSideAndTopics}>
+            <TopicsList topics={StaticTopics}/>
+            <HomeSide />
+        </div>
+        <Link href="/"><a className={classes.detailsLinks}>المزيد</a></Link>
+        <Footer />
     </div>
   );
 };

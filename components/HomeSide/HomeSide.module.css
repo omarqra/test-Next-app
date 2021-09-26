@@ -1,6 +1,6 @@
 .homeSide{ 
     display: none;
-    width: 24%;
+    width: 25%;
     margin-right: 2%;
     background-color: white;
     position: absolute;
@@ -8,7 +8,8 @@
     bottom: 0;
 }
 .socialList {
-    padding: 10px 30px 0 0;
+    width: 80%;
+    margin: 50px auto;
 }
 .linksList {
     margin-top: 80px;
