@@ -3,13 +3,34 @@
   align-items: center;
   justify-content: space-around;
   flex-wrap: wrap;
-  min-height: 100vh;
   .inputs {
     display: flex;
     flex-direction: column;
     width: 100%;
     max-width: 600px;
     padding: 10px;
+    div {
+      overflow: hidden;
+      height: 0;
+      transition: 0.5s;
+
+      font-size: small;
+      color: #545454;
+      font-weight: 500;
+      ul {
+        li {
+          display: flex;
+          align-items: center;
+          padding: 10px;
+          span {
+            margin-left: 10px;
+            display: block;
+            height: 30px;
+            width: 30px;
+          }
+        }
+      }
+    }
 
     input {
       padding: 10px;
