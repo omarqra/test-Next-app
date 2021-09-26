@@ -1,5 +1,14 @@
 .textEditer {
   display: flex;
+  .close_icone {
+    color: #cf2e2e;
+    position: fixed;
+    top: 5px;
+    right: 5px;
+    font-size: x-large;
+    cursor: pointer;
+    z-index: 5;
+  }
   .message {
     text-align: center;
     width: 100%;
@@ -18,8 +27,13 @@
   }
   .wrapper_class {
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
   }
   .toolbar_class {
+    display: flex;
+    justify-content: space-around;
     * {
       direction: ltr;
     }

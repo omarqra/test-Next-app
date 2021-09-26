@@ -170,7 +170,7 @@ export const SEOtools = ({ keyWorld, setkeyWorld }) => {
         </div>
         <div className={style.preview_content}>
           {description === ""
-            ? " استخدم مربع الادخال لكتابة عنوان ووصف للصفحة. هذا المربع يظهر لك كيف ستبدوا هذه الصفحة في بحث جوجل."
+            ? " استخدم مربع الادخال لكتابة عنوان ووصف للصفحة. هذه الفقرة تظهر لك كيف ستبدوا هذه الصفحة في بحث جوجل."
             : description}
         </div>
       </div>
