@@ -1,7 +1,8 @@
 import React from "react";
-import style from "../styles/sidebar.module.scss";
+import style from "./sidebar.module.scss";
 import { FaLock, FaBars } from "react-icons/fa";
 import Link from "next/link";
+import { FaHome, FaPlus, FaTools, FaUserTie } from "react-icons/fa";
 
 const SideBare = () => {
   return (
@@ -31,18 +32,31 @@ const SideBare = () => {
         <ul>
           <FaLock />
           <li>
+            <Link href="/">
+              <a>
+                <FaHome /> - العودة للموقع
+              </a>
+            </Link>
+          </li>
+          <li>
             <Link href="/writer">
-              <a>الصفحة الرئيسية</a>
+              <a>
+                <FaUserTie /> - صفحة الكتاب
+              </a>
             </Link>
           </li>
           <li>
             <Link href="/writer/add">
-              <a>مقالة جديدة</a>
+              <a>
+                <FaPlus /> - مقالة جديدة
+              </a>
             </Link>
           </li>
           <li>
             <Link href="/writer/writing_tools/update">
-              <a> تعديل او حذف مقال</a>
+              <a>
+                <FaTools /> - تعديل او حذف مقال
+              </a>
             </Link>
           </li>
         </ul>

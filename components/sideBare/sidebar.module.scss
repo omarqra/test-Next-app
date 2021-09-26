@@ -35,17 +35,15 @@
     cursor: pointer;
   }
 
-  svg {
-    font-size: x-large;
-    color: #cf2e2e;
-    margin-bottom: 30px;
-  }
-
   ul {
     width: 100%;
-    svg {
+    > svg {
+      font-size: x-large;
+      color: #cf2e2e;
+      margin-bottom: 30px;
       margin: 10px;
     }
+
     a {
       width: 100%;
       display: block;
