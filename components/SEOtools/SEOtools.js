@@ -1,16 +1,23 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { UploadImage } from "../../apiRequest/axios";
 import style from "./seotools.module.scss";
 
 const red = "#f97a7a";
 const green = "#79bf7e";
 const orange = "#eec066";
 
-export const SEOtools = ({ keyWorld, setkeyWorld }) => {
-  const [title_tag, settitle_tag] = useState("");
-  const [description, setdescription] = useState("");
-
+export const SEOtools = ({
+  keyWorld,
+  setkeyWorld,
+  setimage_url,
+  image_url,
+  title_tag,
+  settitle_tag,
+  description,
+  setdescription,
+}) => {
   return (
-    <div className={style.seotools}>
+    <>
       <div className={style.inputs}>
         <input
           placeholder="الكلمة الرئيسية ..."
@@ -174,6 +181,35 @@ export const SEOtools = ({ keyWorld, setkeyWorld }) => {
             : description}
         </div>
       </div>
-    </div>
+      <div className={style.article_image}>
+        <span>
+          <img
+            src={image_url}
+            alt="عارض صورة المقال"
+            onClick={(e) => {
+              e.target.parentNode.nextSibling.click();
+            }}
+          />
+        </span>
+        <input
+          hidden
+          type="file"
+          onChange={async (e) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(e.target.files[0]);
+            reader.onload = () => setimage_url(reader.result);
+
+            const Data = new FormData();
+            Data.append("image", e.target.files[0]);
+            try {
+              const { data } = await UploadImage(Data);
+              setimage_url(data.imageUrl);
+            } catch (error) {
+              console.log(error);
+            }
+          }}
+        />
+      </div>
+    </>
   );
 };

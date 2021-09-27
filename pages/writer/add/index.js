@@ -9,6 +9,7 @@ import draftToHtml from "draftjs-to-html";
 import SideBare from "../../../components/sideBare/sideBare";
 import { SEOtools } from "../../../components/SEOtools/SEOtools";
 import { FaExpandArrowsAlt, FaWindowClose } from "react-icons/fa";
+import ReactHtmlParser from "react-html-parser";
 
 const Editor = dynamic(
   () => {
@@ -16,6 +17,9 @@ const Editor = dynamic(
   },
   { ssr: false }
 );
+const red = "#f97a7a";
+const green = "#79bf7e";
+const orange = "#eec066";
 
 let htmlContent = "";
 let RowsContent = [];
@@ -29,9 +33,16 @@ export default function ADD() {
   const [editorState, seteditorState] = useState(EditorState.createEmpty());
   const [keyWorld, setkeyWorld] = useState("");
   const [contentWorlds, setcontentWorlds] = useState(0);
+  const [image_url, setimage_url] = useState(
+    "/images/defult_article_image.png"
+  );
+  const [title_tag, settitle_tag] = useState("");
+  const [description, setdescription] = useState("");
+  const [render, setRender] = useState(0);
 
   const text_editer = useRef(null);
   const close_icone = useRef(null);
+  const articleview = useRef(null);
 
   const message = useRef(null);
   const setMessage = (M, good) => {
@@ -88,7 +99,11 @@ export default function ADD() {
       );
       if (allP[0]) {
         if (allP[0].text.indexOf(keyWorld) !== -1) {
-          status = true;
+          if (keyWorld === "") {
+            status = false;
+          } else {
+            status = true;
+          }
         }
       }
     }
@@ -125,7 +140,8 @@ export default function ADD() {
       keyWorld_density = Math.round((keyWorld_count / contentWorlds) * 100);
     }
   };
-  console.log(RowsContent.entityMap);
+
+  console.log(contentWorlds);
   return (
     <div className={style.textEditer}>
       <span
@@ -143,7 +159,7 @@ export default function ADD() {
       </Head>
       <SideBare />
       <main>
-        <SEOtools keyWorld={keyWorld} setkeyWorld={setkeyWorld} />
+        <h1>إضافة مقالة</h1>
         <div
           ref={text_editer}
           onKeyUp={(e) => {
@@ -161,7 +177,7 @@ export default function ADD() {
             chack_for_Links();
           }}
         >
-          <span ref={close_icone} className={style.close_icone}>
+          <span ref={close_icone} className={style.close_icone} hidden>
             <FaWindowClose
               onClick={() => {
                 const style = text_editer.current.style;
@@ -192,7 +208,7 @@ export default function ADD() {
             }}
           />
         </div>
-        <ul>
+        <div className={style.extend}>
           <FaExpandArrowsAlt
             onClick={() => {
               const style = text_editer.current.style;
@@ -205,50 +221,161 @@ export default function ADD() {
               close_icone.current.style.display = "block";
             }}
           />
-          <li>
-            {htmlContent.indexOf("<h1>") === -1
-              ? "يجب عليك إضافة H1"
-              : "قمت بإضافة H1"}
-          </li>
-          <li>
-            {keyworld_In_H1
-              ? `الكلمة المفتاحية (${keyWorld}) مستخدمة موجودة في H1`
-              : `الكلمة المفتاحية (${keyWorld}) غير موجودة في H1`}
-          </li>
-          <li>
-            {contentWorlds === 1 ? `يجب إضافة نص إلى المقال` : `اضفت نص للمقال`}
-          </li>
-          <li>
-            {contentWorlds < 150
-              ? `عدد الكلمات في المقال قليل جداً، ${contentWorlds} كلمة، عدد الكلمات الأدنى 300 كلمة.`
-              : `عدد كلمات المقال ${contentWorlds}`}
-          </li>
-          <li>
-            {keyworld_In_P
-              ? `الكلمة الرئيسية (${keyWorld}) مستخدمة في الفقرة الأولى للمقال`
-              : `الكلمة الرئيسية (${keyWorld}) لا تظهر في الفقرة الأولى للمقال`}
-          </li>
-          <li>
-            {keyWorld_density < 1
-              ? `يجب ان تستخدم الكلمة المفتاحية (${keyWorld}) اكثر في الصفحة، لتحسين كثافة الكلمة المفتاحية، الكثافة حالياً ${keyWorld_density}`
-              : `كثافة الكلمات المفتاحية ممتازة، الكثافة الكالية(${keyWorld_density}%)، الكلمة المفتاحية (${keyWorld}) مستخدمة عدد ${keyWorld_count} من المرات.`}
-          </li>
-          <li>
-            {linksCount > 0
-              ? `لقد قمت بإضافة عدد ${linksCount} من الروابط إلى المقال.`
-              : `قم بإضافة روابط لمقالات مشابهة أو مراجع لتحسين تجربة المستخدم.`}
-          </li>
-        </ul>
+        </div>
+        <div
+          className={style.seotools}
+          onKeyUp={(e) => {
+            if (e.keyCode === 13) {
+              countWorlds();
+              chack_p_For_keyworld();
+              chack_H1_For_keyworld();
+              chack_for_Links();
+            }
+          }}
+          onClick={() => {
+            countWorlds();
+            chack_p_For_keyworld();
+            chack_H1_For_keyworld();
+            chack_for_Links();
+            setRender(render + 1);
+          }}
+        >
+          <SEOtools
+            keyWorld={keyWorld}
+            setkeyWorld={setkeyWorld}
+            image_url={image_url}
+            setimage_url={setimage_url}
+            title_tag={title_tag}
+            settitle_tag={settitle_tag}
+            description={description}
+            setdescription={setdescription}
+          />
+          <ul>
+            <li>
+              <span
+                style={{
+                  backgroundColor:
+                    htmlContent.indexOf("<h1>") === -1 ? red : green,
+                }}
+              ></span>
+              {htmlContent.indexOf("<h1>") === -1
+                ? "يجب عليك إضافة H1"
+                : "قمت بإضافة H1"}
+            </li>
+            <li>
+              <span
+                style={{
+                  backgroundColor: !keyworld_In_H1 ? red : green,
+                }}
+              ></span>
+              {keyworld_In_H1
+                ? `الكلمة المفتاحية (${keyWorld}) مستخدمة في الـ H1.`
+                : `الكلمة المفتاحية (${keyWorld}) غير موجودة في H1`}
+            </li>
+            <li>
+              <span
+                style={{
+                  backgroundColor: contentWorlds < 2 ? red : green,
+                }}
+              ></span>
+              {contentWorlds > 2 ? `يجب إضافة نص إلى المقال` : `اضفت نص للمقال`}
+            </li>
+            <li>
+              <span
+                style={{
+                  backgroundColor:
+                    contentWorlds < 150
+                      ? red
+                      : contentWorlds < 300
+                      ? orange
+                      : green,
+                }}
+              ></span>
+              {contentWorlds < 150
+                ? `عدد الكلمات في المقال قليل جداً، ${contentWorlds} كلمة، عدد الكلمات الأدنى 300 كلمة.`
+                : `عدد كلمات المقال ${contentWorlds}`}
+            </li>
+            <li>
+              <span
+                style={{
+                  backgroundColor: keyworld_In_P ? green : red,
+                }}
+              ></span>
+              {keyworld_In_P
+                ? `الكلمة الرئيسية (${keyWorld}) مستخدمة في الفقرة الأولى للمقال`
+                : `الكلمة الرئيسية (${keyWorld}) لا تظهر في الفقرة الأولى للمقال`}
+            </li>
+            <li>
+              <span
+                style={{
+                  backgroundColor: keyWorld_density < 1 ? red : green,
+                }}
+              ></span>
+              {keyWorld_density < 1
+                ? `يجب ان تستخدم الكلمة المفتاحية (${keyWorld}) اكثر في الصفحة، لتحسين كثافة الكلمة المفتاحية، الكثافة حالياً ${keyWorld_density}`
+                : `كثافة الكلمات المفتاحية ممتازة، الكثافة الكالية(${keyWorld_density}%)، الكلمة المفتاحية (${keyWorld}) مستخدمة عدد ${keyWorld_count} من المرات.`}
+            </li>
+            <li>
+              <span
+                style={{
+                  backgroundColor: linksCount === 0 ? red : green,
+                }}
+              ></span>
+              {linksCount > 0
+                ? `لقد قمت بإضافة عدد ${linksCount} من الروابط إلى المقال.`
+                : `قم بإضافة روابط لمقالات مشابهة أو مراجع لتحسين تجربة المستخدم.`}
+            </li>
+            <li>
+              <span
+                style={{
+                  backgroundColor:
+                    image_url === "/images/defult_article_image.png"
+                      ? red
+                      : green,
+                }}
+              ></span>
+              {image_url !== "/images/defult_article_image.png"
+                ? `قمت بإضافة صورة`
+                : `يجب إضافة صورة`}
+            </li>
+          </ul>
+        </div>
+        <button
+          onClick={() => {
+            articleview.current.style.display = "block";
+          }}
+        >
+          معاينة المقالة
+        </button>
+
+        <div ref={articleview} className={style.layout}>
+          <FaWindowClose
+            onClick={() => {
+              articleview.current.style.display = "none";
+            }}
+          />
+          <h1>{title_tag}</h1>
+          <div className={style.main_img}>
+            <img src={image_url} />
+          </div>
+          {ReactHtmlParser(
+            htmlContent !== "" ? htmlContent.replaceAll("<p></p>", "</br>") : ""
+          )}
+          <p
+            style={{
+              textAlign: "center",
+              fontSize: "larger",
+              margin: "50px 15px",
+            }}
+          >
+            كاتب المقال : محمد مطرجي
+          </p>
+          <div>
+            <button>نشر</button>
+            <button>حذف</button>
+          </div>
+        </div>
       </main>
     </div>
   );
-}
-
-{
-  /* <li>{have_img ? `قمت بإضافة صورة` : `يجب إضافة صورة`}</li>
-          <li>
-            {have_img
-              ? `الكلمة المفتاحية ${keyWorld} غير مذكورة في النص البديل للصورة`
-              : `الكلمة المفتاحية ${keyWorld} مستخدمة في النص البديل للصورة`}
-          </li> */
 }

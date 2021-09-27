@@ -23,7 +23,109 @@
   }
   main {
     flex: 4;
-    margin-top: 70px;
+    & > h1 {
+      text-align: center;
+      margin: 0 0 20px;
+      padding: 30px 10px 10px;
+      position: relative;
+      color: #222222;
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        right: 50%;
+        transform: translateX(50%);
+        display: block;
+        background-color: #222222;
+        width: 50px;
+        height: 3px;
+        transition: 0.5s;
+      }
+      &:hover {
+        &:after {
+          width: 100px;
+        }
+      }
+    }
+    .seotools {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      ul {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 600px;
+        padding: 10px;
+        margin: auto;
+
+        li {
+          display: flex;
+          align-items: center;
+          padding: 10px;
+
+          font-size: small;
+          color: #545454;
+          font-weight: 500;
+
+          span {
+            margin-left: 10px;
+            display: block;
+            height: 30px;
+            width: 30px;
+          }
+        }
+      }
+    }
+    .extend {
+      position: relative;
+      svg {
+        font-size: xx-large;
+        margin: 10px;
+        cursor: pointer;
+        color: #cf2e2e;
+        position: absolute;
+        top: -50px;
+        right: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+      }
+    }
+
+    & > button {
+      width: 100%;
+      padding: 10px;
+      background-color: #545454;
+      color: #fcfcfc;
+      cursor: pointer;
+      margin: 30px 0;
+      outline: none;
+      border: none;
+    }
+    .layout {
+      display: none;
+      position: fixed;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      .main_img {
+        width: 100%;
+        max-height: 50vh;
+        overflow: hidden;
+        background-color: white;
+        img {
+          width: 100%;
+        }
+      }
+      h1 {
+        &:first-of-type {
+          text-align: center;
+          margin: 10px 0;
+        }
+      }
+    }
   }
   .wrapper_class {
     background-color: white;
