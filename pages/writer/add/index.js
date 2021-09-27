@@ -115,6 +115,8 @@ export default function ADD() {
       if (RowsContent.entityMap[0]) {
         const arr = Object.values(RowsContent.entityMap);
         linksCount = arr.filter((item) => item.type === "LINK").length;
+      } else {
+        linksCount = 0;
       }
     }
   };
