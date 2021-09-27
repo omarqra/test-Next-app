@@ -1,3 +1,4 @@
+import Footer from "./Footer/Footer";
 import classes from "./Layout.module.css";
 const Layout = ({children}) => {
     return (
@@ -21,6 +22,7 @@ const Layout = ({children}) => {
             </div>
         </nav>
         {children}
+        <Footer />
     </>
     )
         

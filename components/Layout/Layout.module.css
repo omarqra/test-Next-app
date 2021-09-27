@@ -1,5 +1,5 @@
 .nav{
-    background-color: #444;
+    background-color: #4D4D4D;
 }
 .container {
     width: 90%;
@@ -14,10 +14,13 @@
 .navContentHeader {
     padding: 0;
     margin: 0;
+    font-size: 30px;
 }
 .dropdown{
     position: relative;
-    padding: 20px;
+    padding-top: 32px;
+    padding-bottom: 7px;
+    font-size: 22px;
 }
 .dropdownList {
     list-style: none;
@@ -29,7 +32,7 @@
     z-index: 1;
     background-color: #666;
     left: -10px;
-    top: 45px;
+    top: 81px;
 }
 .dropdown:hover .dropdownList {
     display: block;
