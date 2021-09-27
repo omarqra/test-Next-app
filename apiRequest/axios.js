@@ -8,3 +8,5 @@ export const UploadImage = (data) =>
   });
 export const deteteWriter = (WriterID) =>
   axios.delete(`/api/writers/${WriterID}`);
+
+export const addarticle = (data) => axios.post("/api/articles", data);

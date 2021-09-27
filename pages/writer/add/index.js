@@ -4,7 +4,7 @@ import { EditorState, convertToRaw } from "draft-js";
 import dynamic from "next/dynamic";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import style from "../../../styles/textEditer.module.scss";
-import { UploadImage } from "../../../apiRequest/axios";
+import { addarticle, UploadImage } from "../../../apiRequest/axios";
 import draftToHtml from "draftjs-to-html";
 import SideBare from "../../../components/sideBare/sideBare";
 import { SEOtools } from "../../../components/SEOtools/SEOtools";
@@ -136,10 +136,14 @@ export default function ADD() {
       const count = world_With_Space.length;
       if (count !== contentWorlds) setcontentWorlds(count);
 
-      keyWorld_count = world_With_Space.filter(
-        (item) => item === keyWorld
-      ).length;
-      keyWorld_density = Math.round((keyWorld_count / contentWorlds) * 100);
+      if (keyWorld !== "") {
+        keyWorld_count = world_With_Space.filter(
+          (item) => item === keyWorld
+        ).length;
+        keyWorld_density = Math.round((keyWorld_count / contentWorlds) * 100);
+      } else {
+        keyWorld_density = 0;
+      }
     }
   };
 
@@ -343,8 +347,14 @@ export default function ADD() {
           </ul>
         </div>
         <button
-          onClick={() => {
-            articleview.current.style.display = "block";
+          onClick={async () => {
+            // articleview.current.style.display = "block";
+            await addarticle({
+              title: title_tag,
+              imageurl: image_url,
+              description,
+              htmlcontent: htmlContent.replaceAll("<p></p>", "</br>"),
+            });
           }}
         >
           معاينة المقالة
