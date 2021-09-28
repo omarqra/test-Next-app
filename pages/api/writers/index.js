@@ -1,8 +1,10 @@
 import Writers from "../../../db/writers";
 import connect from "../../../middleware/connect";
 import bcrypt from "bcrypt";
+import { writersAuth } from "../../../middleware/auth";
 
 const apiRoute = connect
+  .use(writersAuth)
   .get(async (req, res) => {
     try {
       const allwriters = await Writers.find();

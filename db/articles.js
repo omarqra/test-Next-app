@@ -8,6 +8,7 @@ const Articles = new Model(
     htmlcontent text ${constaint.NOT_NULL},
     imageurl ${constaint.Datatype.VARCHAR(255) + constaint.NOT_NULL},
     description ${constaint.Datatype.VARCHAR(255) + constaint.NOT_NULL},
+    writer ${constaint.Datatype.VARCHAR() + constaint.NOT_NULL},
     ${constaint.PRIMARY_KEY} (ArticleID)`,
   db
 );

@@ -147,7 +147,6 @@ export default function ADD() {
     }
   };
 
-  console.log(contentWorlds);
   return (
     <div className={style.textEditer}>
       <span
@@ -354,6 +353,7 @@ export default function ADD() {
               imageurl: image_url,
               description,
               htmlcontent: htmlContent.replaceAll("<p></p>", "</br>"),
+              writer: "omar",
             });
           }}
         >

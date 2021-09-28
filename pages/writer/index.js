@@ -37,7 +37,10 @@ export default function Home() {
       const { data } = await getAllWriters();
       setUsers(data);
     } catch (error) {
-      console.log(error);
+      const { data } = error.response;
+      if (data.message === "قم بتسجيل الدخول اولا")
+        window.location = "/writer/login";
+      return;
     }
   };
   useEffect(() => {
