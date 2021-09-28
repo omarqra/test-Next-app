@@ -19,7 +19,7 @@
     list-style: none;
 }
 .socialList li {
-    padding: 7px 0;
+    padding: 26px 0;
     color: darkblue;
     text-decoration: underline;
     text-align: center;
@@ -27,13 +27,13 @@
     font-weight: 500;
 }
 .socialList li img{
-    width: 30px;
+    width: 53px;
     float: right;
-    border-radius: 6px;
+    border-radius: 12px;
 }
 .link {
     display: block;
-    padding: 18px 0;
+    padding: 29px 0;
     margin: 5px 2px;
     background-color: #dedede;
     text-align: center;

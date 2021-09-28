@@ -107,7 +107,32 @@
 }
 
 @media screen and (min-width: 1024px) {
+    .footerLists {
+        align-items: center;
+        justify-content: center;
+        margin: 40px;
+    }
     .image{
         display: block
-    }   
+    }
+    .aboutList {
+        width: 30%;
+        flex-grow: 1;
+    }
+    .socialDiv {
+        width: 20%;
+        flex-grow: 1;
+    }
+    .imgDiv {
+        width: 50%;
+        flex-grow: 3;
+    }
+    .image{
+        height: 210px;
+        margin: auto;
+    }
+    .copyRight{
+        font-size: 14px;
+        margin: 20px;
+    }
 }
