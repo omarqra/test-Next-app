@@ -3,7 +3,7 @@
     margin: 0;
 }
 .divCard {
-    padding: 15px;
+    padding: 20px 15px;
     margin: 2vh 0;
     background-color: white;
 }
@@ -21,11 +21,12 @@
 }
 .cardHeader {
     padding: 10px 0;
+    font-size: medium;
 }
 .cardMore {
     display: inline-block;
     width: 100%;
-    padding: 6px 0;
+    padding: 8px 0;
     background-color: red;
     color: white;
     font-size: 13px;
@@ -87,5 +88,13 @@
 @media screen and (min-width: 1024px) {
     .cardHeader {
         font-size: 22px;
+        bottom: -60px;
+    }
+    .divDetails {
+        padding-right: 10px;
+        margin-left: 50px;
+    }
+    .cardMore {
+        width: 200px;
     }
 }

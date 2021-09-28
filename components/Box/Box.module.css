@@ -1,0 +1,15 @@
+.box {
+    text-align: center;
+    margin: 50px 0;
+}
+.boxTitle {
+    background-color: #4688D2;
+    font-weight: normal;
+    color: white;
+    padding: 12px;
+}
+.boxText {
+    background-color: #F1F1F1;
+    padding: 10px;
+    color: #4D4D4D;
+}

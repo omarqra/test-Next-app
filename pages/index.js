@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Footer from "../components/Footer/Footer";
 import HomeSide from "../components/HomeSide/HomeSide";
 import TopicsList from "../components/Topics/TopicsList";
 import classes from "../styles/homePage.module.css";
@@ -40,7 +39,6 @@ const Home = () => {
             <HomeSide />
         </div>
         <Link href="/"><a className={classes.detailsLinks}>المزيد</a></Link>
-        <Footer />
     </div>
   );
 };
