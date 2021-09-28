@@ -1,5 +1,5 @@
 import classes from "./Footer.module.css";
-
+import Link from "next/link";
 const Footer = () => {
     return (
         <footer className={classes.footer}>
@@ -11,10 +11,10 @@ const Footer = () => {
                     <img className={classes.socialImg} src="https://th.bing.com/th/id/R.28455daec5f7b0b8406c8b32ef342ce1?rik=%2fA0teYw7JGO7Hw&pid=ImgRaw&r=0" alt="instagram" />
                 </div>
                 <div className={classes.aboutList}>
-                    <span>سياسة الخصوصية</span>
-                    <span>شروط الاستخدام</span>
-                    <span>من نحن</span>
-                    <span last="last">اتصل بنا</span>
+                    <span><Link href="/about"><a>سياسة الخصوصية</a></Link></span>
+                    <span><Link href="/about"><a>شروط الاستخدام</a></Link></span>
+                    <span><Link href="/about"><a>من نحن</a></Link></span>
+                    <span last="last"><Link href="/about"><a>اتصل بنا</a></Link></span>
                 </div>
             </div>
             <span className={classes.copyRight}>&copy; حميع الحقوق محفوظة لصالح موقع المطرجي 2021</span>

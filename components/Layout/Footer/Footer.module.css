@@ -17,17 +17,17 @@
 .aboutList {
     margin: 10px 0;
 }
-    .aboutList * {
+    .aboutList span {
         display: inline-block;
         text-align: center;
         width: 50%;
         font-size: 13px;
         padding: 5px ;
     }
-    .aboutList *:nth-child(3) {
+    .aboutList span:nth-child(3) {
         position: relative;
     }
-    .aboutList *:nth-child(3)::after {
+    .aboutList span:nth-child(3)::after {
         content: "";
         display: block;
         position: absolute;
@@ -37,10 +37,10 @@
         left: 0;
         bottom: 35%;
     }
-    .aboutList *:nth-child(1),.aboutList *:nth-child(2) {
+    .aboutList span:nth-child(1),.aboutList span:nth-child(2) {
         position: relative;
     }
-    .aboutList *:nth-child(1)::after,.aboutList *:nth-child(2)::after {
+    .aboutList span:nth-child(1)::after,.aboutList span:nth-child(2)::after {
         content: "";
         display: block;
         position: absolute;
@@ -83,15 +83,15 @@
         justify-content: center;
         border-left: 2px solid #222;
     }
-    .aboutList * {
+    .aboutList span {
         font-size: 18px;
         width: auto;
     }
-    .aboutList *:not([last="last"]){
+    .aboutList span:not([last="last"]){
         position: relative;
         margin-bottom:5px ;
     }
-    .aboutList *:not([last="last"])::after{
+    .aboutList span:not([last="last"])::after{
         content: "";
         display: block;
         position: absolute;
