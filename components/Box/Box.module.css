@@ -7,15 +7,31 @@
     font-weight: normal;
     color: white;
     padding: 12px;
-}
-.boxTextUnShow {
-    height: 0;
-    overflow: hidden;
+    font-size: 22px;
 }
 .boxTextShow {
-    padding: 10px;
+    overflow: hidden;
+    height: 0;
     background: #F1F1F1;
     color: #4D4D4D;
-    overflow-y: hidden;
-    transition: height 1s linear;
+    transition: height .2s linear;
+    font-size: 16px;
+}
+.boxTextShow p {
+    padding: 10px;
+}
+@media screen and (min-width: 1024px) {
+    .boxTitle {
+        background-color: #4688D2;
+        font-weight: normal;
+        color: white;
+        padding: 1vw;
+        font-size: 2vw;
+    }
+    .boxTextShow {
+        font-size: 1.5vw;
+    }
+    .box * {
+        letter-spacing: 1px;
+    }
 }
