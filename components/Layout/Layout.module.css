@@ -21,6 +21,7 @@
     padding-top: 32px;
     padding-bottom: 7px;
     font-size: 18px;
+    cursor: pointer;
 }
 .dropdownList {
     list-style: none;

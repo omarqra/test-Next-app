@@ -27,9 +27,13 @@
     display: inline-block;
     width: 100%;
     padding: 8px 0;
-    background-color: red;
+    background-color: #CF2E2E;
     color: white;
     font-size: 13px;
+    transition: background-color .5s ;
+}
+.cardMore:hover {
+    background-color: #d44;
 }
 /* DivCardImg */
 

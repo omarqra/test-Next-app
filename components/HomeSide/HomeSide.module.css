@@ -19,7 +19,7 @@
     list-style: none;
 }
 .socialList li {
-    padding: 26px 0;
+    /* padding: 26px 0; */
     color: darkblue;
     text-decoration: underline;
     text-align: center;
@@ -30,6 +30,10 @@
     width: 53px;
     float: right;
     border-radius: 12px;
+    margin: 12px 5px;
+}
+.socialList li a {
+    padding: 26px 0;
 }
 .link {
     display: block;

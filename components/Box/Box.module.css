@@ -1,6 +1,9 @@
-.box {
+.boxunclick {
     text-align: center;
     margin: 50px 0;
+}
+.boxclicked{
+    width: 1000px;
 }
 .boxTitle {
     background-color: #4688D2;
@@ -10,6 +13,8 @@
 }
 .boxText {
     background-color: #F1F1F1;
-    padding: 10px;
+    /* padding: 10px; */
     color: #4D4D4D;
+    height: 0;
+    overflow: hidden;
 }

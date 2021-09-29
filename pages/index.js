@@ -2,7 +2,7 @@ import Link from "next/link";
 import HomeSide from "../components/HomeSide/HomeSide";
 import TopicsList from "../components/Topics/TopicsList";
 import classes from "../styles/homePage.module.css";
-
+import homebg from "../public/images/home/homebg.png"
 const StaticTopics = [
   {
     id: 1,
@@ -30,7 +30,7 @@ const Home = () => {
   return (
        <div>
         <div className={classes.homePackgroundDiv}>
-            <img className={classes.homePackground} src="http://www.hdwallpaperspulse.com/wp-content/uploads/2015/05/30/art-desktop-luxury-wallpapers.jpg" alt="home image" />
+            <img className={classes.homePackground} src={homebg.src} alt="home image" />
             <p className={classes.PrgOnImg}>اعرف أكثر عن المشروع</p>
         </div>
         <Link href="/"><a className={classes.detailsLinks}>الأكثر زيارة</a></Link>

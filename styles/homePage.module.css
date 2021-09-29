@@ -19,8 +19,12 @@
     left: 15%;
     transform: translate(0,-60%);
     padding: 12px 35px;
+    cursor: pointer;
+    transition: background-color .5s;
 }
-
+.PrgOnImg:hover {
+    background-color: #d44;
+}
 .detailsLinks {
     font-size: large;
     display: block;
@@ -58,7 +62,7 @@
 }
 @media screen and (min-width: 1024px) {
     .homePackground {
-        margin: 65px 0 110px 0;
+        margin: 25px 0 110px 0;
         height: 504px;
     }
     .PrgOnImg {
@@ -68,7 +72,7 @@
     }
     .detailsLinks {
         font-size: x-large;
-        padding: 31px 0;
+        padding: 24px 0;
     }
     .PrgOnImg {
         bottom: 5%;
