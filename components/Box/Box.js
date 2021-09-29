@@ -1,13 +1,17 @@
 import classes from "./Box.module.css"
 const Box = ({title, text}) => {
     let state = false;
-    const clicked = () => state = !state;
+    const fixClick = (e) => {
+        state = !state;
+        if (state) e.target.nextSibling.className = classes.boxTextShow;
+        else e.target.nextSibling.className = classes.boxTextUnShow;
+    }
     return (
-        <div className={state? classes.boxclicked: classes.boxunclick} onClick={clicked}>
+        <div className={classes.box} onClick={fixClick}>
             <h3 className={classes.boxTitle}>
                     {title}
             </h3>
-            <p className={classes.boxText}>
+            <p className={classes.boxTextUnShow}>
                 {text}
             </p>
         </div>
