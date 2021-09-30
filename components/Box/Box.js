@@ -1,13 +1,26 @@
 import classes from "./Box.module.css"
 const Box = ({title, text}) => {
+    let state = false;
+    const fixClick = (e) => {
+        state = !state;
+        if (state) {
+            e.target.nextSibling.style.height = `${e.target.nextSibling.firstChild.clientHeight}px`;
+        }
+        else {
+            e.target.nextSibling.style.height = "0";
+        }
+
+    }
     return (
-        <div className={classes.box}>
+        <div className={classes.box} onClick={fixClick}>
             <h3 className={classes.boxTitle}>
-                {title}
+                    {title}
             </h3>
-            <p className={classes.boxText}>
-                {text}
-            </p>
+            <div className={classes.boxTextShow}>
+                <p>
+                    {text}
+                </p>
+            </div>
         </div>
     )
 }

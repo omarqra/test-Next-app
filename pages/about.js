@@ -23,12 +23,19 @@ const Boxes = {
 const About = () => {
     return (
         <div>
-            <img className={classes.aboutbg} src={aboutbg.src} />
-            <p className={classes.weAre}>نحن مجموعة من الشباب السوري المبدع بتوجيه محمد المطرجي</p>
-            <Box title={Boxes.ourView.title} text={Boxes.ourView.text} />
-            <Box title={Boxes.message.title} text={Boxes.message.text} />
-            <Box title={Boxes.goals.title} text={Boxes.goals.text} />
-            <Box title={Boxes.ourValues.title} text={Boxes.ourValues.text} />
+            <div className={classes.aboutInter}>
+                <img className={classes.aboutbg} src={aboutbg.src} />
+                <div className={classes.weAre}>
+                    <span>مجموعة من الشباب الســـــــــــــوري المبدع </span>
+                    <span>بتوجيه: <span>محمد المطرجي</span></span>
+                </div>
+            </div>
+            <div className={classes.BoxesList} >
+                <Box title={Boxes.ourView.title} text={Boxes.ourView.text} />
+                <Box title={Boxes.message.title} text={Boxes.message.text} />
+                <Box title={Boxes.goals.title} text={Boxes.goals.text} />
+                <Box title={Boxes.ourValues.title} text={Boxes.ourValues.text} />
+            </div>
         </div>
     )
 }

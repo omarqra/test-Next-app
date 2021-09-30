@@ -1,10 +1,11 @@
 import classes from "./Footer.module.css";
 import Link from "next/link";
+import footerImg from "../../../public/images/footer/footer.png"
 const Footer = () => {
     return (
         <footer className={classes.footer}>
             <div className={classes.footerLists}>
-                <div className={classes.imgDiv}><img  className={classes.image} src="https://th.bing.com/th/id/OIP._U_25wQ97HqBu4hHFg53jgHaEK?w=299&h=180&c=7&r=0&o=5&pid=1.7" alt="any photo" /></div>
+                <div className={classes.imgDiv}><img  className={classes.image} src={footerImg.src} alt="any photo" /></div>
                 <div className={classes.socialDiv}>
                     <img className={classes.socialImg} src="https://th.bing.com/th/id/R.474b5da11cc41d790563ef47f49a79c7?rik=m0cZbfb4q8X27w&pid=ImgRaw&r=0" alt="facebook" />
                     <img className={classes.socialImg} src="https://th.bing.com/th/id/OIP.AJVrHRdiMbdgkzansQ7LNwHaHk?w=188&h=192&c=7&r=0&o=5&pid=1.7" alt="twitter" />
