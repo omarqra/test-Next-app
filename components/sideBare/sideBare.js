@@ -46,7 +46,7 @@ const SideBare = () => {
             </Link>
           </li>
           <li>
-            <Link href="/writer/add">
+            <Link href="/writer/articles/add">
               <a>
                 <FaPlus /> - مقالة جديدة
               </a>

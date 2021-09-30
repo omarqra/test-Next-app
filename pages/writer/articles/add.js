@@ -347,7 +347,6 @@ export default function ADD() {
         </div>
         <button
           onClick={async () => {
-            // articleview.current.style.display = "block";
             await addarticle({
               title: title_tag,
               imageurl: image_url,

@@ -34,9 +34,7 @@ const apiRoute = connect
       });
       res.status(200).json({ message: `تم إضافة الكاتب` });
     } catch (error) {
-      console.log(error);
       res.status(500).json({ message: `حدث مشكلة اثناء اضافة الكاتب` });
     }
   });
-
 export default apiRoute;
