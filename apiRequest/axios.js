@@ -22,4 +22,5 @@ export const UploadImage = (data) =>
     headers: { "content-type": "multipart/form-data" },
   });
 
+export const get_All_Article = () => API.get("articles");
 export const addarticle = (data) => API.post("articles", data);

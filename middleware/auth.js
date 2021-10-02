@@ -9,8 +9,8 @@ export const writersAuth = async (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1];
   try {
     const decodedData = jwt.verify(token, process.env.JWT_SECRET);
-    req.writerID = decodedData.writerID;
-
+    req.writerID = decodedData.WriterID;
+    req.writer = decodedData.writer;
     next();
   } catch (error) {
     return res.status(403).json({ message: "قم بتسجيل الدخول اولا" });

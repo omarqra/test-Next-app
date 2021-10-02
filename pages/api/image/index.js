@@ -8,8 +8,13 @@ export const config = {
 };
 
 const apiRoute = connect.use(upload.single("image")).put((req, res) => {
-  const image = req.file.filename;
-  return res.status(200).json({ imageUrl: `/images/${image}` });
+  try {
+    const image = req.file.filename;
+    return res.status(200).json({ imageUrl: `/images/${image}` });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "حصلت مشكلة اثناء رفع الصورة" });
+  }
 });
 
 export default apiRoute;

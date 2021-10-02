@@ -13,11 +13,4 @@ const Articles = new Model(
   db
 );
 
-// (async () => {
-//   try {
-//     await Articles.creatTable();
-//   } catch (error) {
-//     console.log(error);
-//   }
-// })();
 export default Articles;

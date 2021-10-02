@@ -53,7 +53,7 @@ const SideBare = () => {
             </Link>
           </li>
           <li>
-            <Link href="/writer/writing_tools/update">
+            <Link href="/writer/articles/update">
               <a>
                 <FaTools /> - تعديل او حذف مقال
               </a>

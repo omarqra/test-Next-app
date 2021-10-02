@@ -5,14 +5,12 @@ const Writers = new Model(
   "Writers",
   `WriterID ${constaint.Datatype.INT + constaint.UNIQUE}AUTO_INCREMENT ,
     name ${
-      (constaint.Datatype.VARCHAR() + constaint.NOT_NULL, constaint.UNIQUE)
+      constaint.Datatype.VARCHAR() + constaint.NOT_NULL + constaint.UNIQUE
     },
     password ${constaint.Datatype.VARCHAR(255) + constaint.NOT_NULL},
     imageUrl ${constaint.Datatype.VARCHAR(255) + constaint.NOT_NULL},
     ${constaint.PRIMARY_KEY} (WriterID)`,
   db
 );
-// (async () => {
-//   await Writers.creatTable();
-// })();
+
 export default Writers;

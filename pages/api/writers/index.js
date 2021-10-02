@@ -5,14 +5,6 @@ import { writersAuth } from "../../../middleware/auth";
 
 const apiRoute = connect
   .use(writersAuth)
-  .get(async (req, res) => {
-    try {
-      const allwriters = await Writers.find();
-      res.status(200).json(allwriters);
-    } catch (error) {
-      res.status(500).json({ message: `حدث مشكلة اثناء اضافة الكاتب` });
-    }
-  })
   .post(async (req, res) => {
     const { writer_Image, writer_name, writer_password } = req.body;
     if (
@@ -36,5 +28,15 @@ const apiRoute = connect
     } catch (error) {
       res.status(500).json({ message: `حدث مشكلة اثناء اضافة الكاتب` });
     }
+  })
+  .get(async (req, res) => {
+    try {
+      const allwriters = await Writers.find();
+      res.status(200).json(allwriters);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: `حدث مشكلة اثناء استدعاء الكاتب` });
+    }
   });
+
 export default apiRoute;
