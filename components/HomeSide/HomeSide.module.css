@@ -19,21 +19,22 @@
     list-style: none;
 }
 .socialList li {
-    /* padding: 26px 0; */
+    margin: 30px 0;
     color: darkblue;
     text-decoration: underline;
     text-align: center;
     line-height:30px ;
     font-weight: 500;
+    display: flex;
+    align-items: center;
 }
 .socialList li img{
     width: 53px;
-    float: right;
+    /* float: right; */
     border-radius: 12px;
-    margin: 12px 5px;
 }
 .socialList li a {
-    padding: 26px 0;
+    margin-right: 20px;
 }
 .link {
     display: block;
