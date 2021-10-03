@@ -28,8 +28,7 @@ const StaticTopics = [
 
 const Section = () => {
     const router = useRouter();
-    // router.route = `sectionId:${router.query.sectionId}`;
-    const sectionId = router.query.sectionId;
+    // const sectionId = router.query.sectionId;
     return (
         <div>
             <Link href="/"><a className={classes.detailsLinksS} location="top">قسم التكنلوجيا</a></Link>
