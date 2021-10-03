@@ -86,7 +86,7 @@
     .detailsLinksS {
         font-size: x-large;
         padding: 24px 0;
-        background-color: #0060e0;
+        /* background-color: #0060e0; */
     }
     .detailsLinksS[location = "top"] {
         margin: 40px 0 0 0;
