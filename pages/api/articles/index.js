@@ -6,10 +6,18 @@ const apiRoute = connect
   .use(writersAuth)
   .post(async (req, res) => {
     const writer = req.writer;
-    const { title, htmlcontent, imageurl, description, keyword } = req.body;
+    const { title, htmlcontent, imageurl, description, keyword, SectionID } =
+      req.body;
 
     let missing_data = false;
-    const keys = ["keyword", "title", "htmlcontent", "imageurl", "description"];
+    const keys = [
+      "keyword",
+      "title",
+      "htmlcontent",
+      "imageurl",
+      "description",
+      "SectionID",
+    ];
     keys.forEach((element) => {
       if (req.body[element]) {
         if (req.body[element] === "") {
@@ -21,7 +29,7 @@ const apiRoute = connect
       }
     });
     if (missing_data) {
-      res.status(500).json({ message: "هنالك معلومات ناقصة في المقال" });
+      return res.status(500).json({ message: "هنالك معلومات ناقصة في المقال" });
     }
     if (imageurl === "/images/defult_article_image.png") {
       return res.status(500).json({ message: "لا يجب نشر مقال بدون صورة" });
@@ -34,6 +42,7 @@ const apiRoute = connect
         description,
         writer,
         keyword,
+        SectionID,
       });
       return res.status(200).json({ message: "تم إضافة المقال بنجاح" });
     } catch (error) {
@@ -46,15 +55,18 @@ const apiRoute = connect
     try {
       if (writer === "admin") {
         const allArticles = await Articles.find();
-        return res.status(200).json(allArticles);
+        return res.status(200).json(allArticles.reverse());
       } else {
         const allArticles = await Articles.find({
           selectors: { writer },
           columns: "ArticleID , title , writer",
         });
+        return res.status(200).json(allArticles.reverse());
       }
     } catch (error) {
-      res.status(500).json({ message: `حدث مشكلة اثناء استدعاء المقالات` });
+      return res
+        .status(500)
+        .json({ message: `حدث مشكلة اثناء استدعاء المقالات` });
     }
   });
 

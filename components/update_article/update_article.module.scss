@@ -13,6 +13,7 @@
 }
 .editer_class {
   position: relative;
+  padding: 10px;
 }
 .close_icone {
   color: #cf2e2e;
@@ -24,19 +25,6 @@
   z-index: 5;
 }
 .main {
-  .message {
-    text-align: center;
-    width: 100%;
-    max-width: 300px;
-    position: fixed;
-    left: 20px;
-    bottom: 20px;
-    z-index: 4;
-
-    color: #fcfcfc;
-    background-color: #cf2e2e;
-    border-radius: 5px;
-  }
   & > h1 {
     text-align: center;
     margin: 0 0 20px;

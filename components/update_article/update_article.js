@@ -34,7 +34,7 @@ let keyWorld_count = 0;
 let keyWorld_density = 0;
 let linksCount = 0;
 
-export default function Update_article({ article }) {
+export default function Update_article({ article, message, setMessage }) {
   const router = useRouter();
 
   const [editorState, seteditorState] = useState(EditorState.createEmpty());
@@ -50,17 +50,6 @@ export default function Update_article({ article }) {
   const text_editer = useRef(null);
   const close_icone = useRef(null);
   const articleview = useRef(null);
-
-  const message = useRef(null);
-  const setMessage = (M, good) => {
-    message.current.style.padding = "20px";
-    message.current.innerHTML = M;
-    if (good) {
-      message.current.style.backgroundColor = "green";
-    } else {
-      message.current.style.backgroundColor = "#cf2e2e";
-    }
-  };
 
   useEffect(() => {
     const blocksFromHtml = htmlToDraft(article.htmlcontent);
@@ -171,14 +160,7 @@ export default function Update_article({ article }) {
   return (
     <div className={style.main}>
       <h1>تعديل مقالة</h1>
-      <span
-        className={style.message}
-        ref={message}
-        onClick={(e) => {
-          e.target.innerHTML = "";
-          e.target.style.padding = "0";
-        }}
-      ></span>
+
       <div
         ref={text_editer}
         onKeyUp={(e) => {
@@ -270,6 +252,27 @@ export default function Update_article({ article }) {
           setdescription={setdescription}
         />
         <ul>
+          <li>
+            <select
+              onChange={(e) => {
+                setsection(e.target.value);
+              }}
+            >
+              <option value="" hidden>
+                اختر القسم ...
+              </option>
+
+              {sections &&
+                typeof sections === "object" &&
+                sections.map((s, i) => {
+                  return (
+                    <option key={i} value={s.SectionID}>
+                      {s.name}
+                    </option>
+                  );
+                })}
+            </select>
+          </li>
           <li>
             <span
               style={{

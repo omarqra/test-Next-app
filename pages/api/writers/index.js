@@ -24,18 +24,20 @@ const apiRoute = connect
         password: hashedpassword,
         imageUrl: writer_Image,
       });
-      res.status(200).json({ message: `تم إضافة الكاتب` });
+      return res.status(200).json({ message: `تم إضافة الكاتب` });
     } catch (error) {
-      res.status(500).json({ message: `حدث مشكلة اثناء اضافة الكاتب` });
+      return res.status(500).json({ message: `حدث مشكلة اثناء اضافة الكاتب` });
     }
   })
   .get(async (req, res) => {
     try {
       const allwriters = await Writers.find();
-      res.status(200).json(allwriters);
+      return res.status(200).json(allwriters.reverse());
     } catch (error) {
       console.log(error);
-      res.status(500).json({ message: `حدث مشكلة اثناء استدعاء الكاتب` });
+      return res
+        .status(500)
+        .json({ message: `حدث مشكلة اثناء استدعاء الكاتب` });
     }
   });
 

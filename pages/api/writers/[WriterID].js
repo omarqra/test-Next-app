@@ -43,10 +43,10 @@ const apiRoute = connect
         update.password = hashedpassword;
       }
       await Writers.update({ WriterID }, update);
-      res.status(200).json({ message: `تم تعديل الكاتب` });
+      return res.status(200).json({ message: `تم تعديل الكاتب` });
     } catch (error) {
       console.log(error);
-      res.status(500).json({ message: `حدث مشكلة اثناء تعديل الكاتب` });
+      return res.status(500).json({ message: `حدث مشكلة اثناء تعديل الكاتب` });
     }
   });
 

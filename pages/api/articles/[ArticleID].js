@@ -7,9 +7,11 @@ const apiRoute = connect
     const { ArticleID } = req.query;
     try {
       const allArticles = await Articles.find({ selectors: { ArticleID } });
-      res.status(200).json(allArticles[0]);
+      return res.status(200).json(allArticles[0]);
     } catch (error) {
-      res.status(500).json({ message: `حدث مشكلة اثناء استدعاء المقالة` });
+      return res
+        .status(500)
+        .json({ message: `حدث مشكلة اثناء استدعاء المقالة` });
     }
   })
   .use(writersAuth)

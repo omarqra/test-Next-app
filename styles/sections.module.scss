@@ -1,0 +1,122 @@
+.Sections_page {
+  display: flex;
+  .message {
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    z-index: 4;
+
+    color: #fcfcfc;
+    background-color: #cf2e2e;
+    border-radius: 5px;
+  }
+  main {
+    flex: 4;
+    & > h1 {
+      text-align: center;
+      margin: 0 0 20px;
+      padding: 30px 10px 10px;
+      position: relative;
+      color: #222222;
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        right: 50%;
+        transform: translateX(50%);
+        display: block;
+        background-color: #222222;
+        width: 50px;
+        height: 3px;
+        transition: 0.5s;
+      }
+      &:hover {
+        &:after {
+          width: 100px;
+        }
+      }
+    }
+    h2 {
+      padding-bottom: 25px;
+      color: #222222;
+    }
+    form {
+      width: 100%;
+      max-width: 800px;
+      margin: auto;
+      padding: 10px;
+
+      div {
+        display: flex;
+        justify-content: stretch;
+        input {
+          font-size: medium;
+          padding: 10px;
+          &:first-of-type {
+            flex: 8;
+          }
+          &:last-of-type {
+            flex: 2;
+          }
+        }
+        span {
+          font-size: large;
+          color: #cf2e2e;
+          cursor: pointer;
+          padding: 10px;
+          flex: 1;
+          text-align: center;
+        }
+      }
+    }
+    table {
+      width: 100%;
+      max-width: 800px;
+      margin: auto auto 70px;
+      padding: 10px;
+      border-collapse: collapse;
+
+      caption {
+        padding: 50px 0 20px;
+        text-align: right;
+        font-size: x-large;
+        font-weight: 700;
+        color: #222222;
+      }
+      thead {
+        background-color: #222222;
+        color: #fcfcfc;
+      }
+      th {
+        padding: 10px;
+        button {
+          padding: 5px 20px;
+          margin: 0 5px;
+          border: none;
+          box-shadow: 1px 1px 4px -2px black;
+          transition: 0.1s;
+          cursor: pointer;
+
+          &:last-of-type {
+            &:hover {
+              background-color: #222222;
+              color: #fcfcfc;
+            }
+          }
+          &:hover {
+            background-color: tomato;
+          }
+          &:active {
+            box-shadow: none;
+          }
+        }
+      }
+      tr:nth-child(even) {
+        background-color: tomato;
+      }
+    }
+  }
+}

@@ -6,11 +6,13 @@ let n = 0;
 export default async function handler(req, res) {
   n += 1;
   if (n > 1) {
-    res.status(500).json({ message: "لا يمكن انشاء القوائم اكثر من مرة" });
+    return res
+      .status(500)
+      .json({ message: "لا يمكن انشاء القوائم اكثر من مرة" });
   }
   //   const data = await Articles.find();
   //   if (data.lenght > 0) {
-  //     res
+  //   return res
   //       .status(500)
   //       .json({ message: "لا يمكن اعادة انشاء القوائم اكثر من مرة" });
   //   }

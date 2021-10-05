@@ -34,3 +34,7 @@ export const updatearticle = (data, articleID) =>
 export const deleteArticle = (articleID) => API.delete(`articles/${articleID}`);
 
 export const getSections = () => API.get("sections");
+export const addSection = (data) => API.post("sections", data);
+export const deleteSection = (SectionID) => API.delete(`sections/${SectionID}`);
+export const updateSection = (SectionID, date) =>
+  API.put(`sections/${SectionID}`, date);

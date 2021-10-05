@@ -34,13 +34,13 @@ let keyWorld_count = 0;
 let keyWorld_density = 0;
 let linksCount = 0;
 
-let sections;
 export default function ADD() {
   const router = useRouter();
 
   const [editorState, seteditorState] = useState(EditorState.createEmpty());
   const [keyword, setkeyWord] = useState("");
-  const [section, setsection] = useState("");
+  const [section, setsection] = useState(0);
+  const [sections, setsections] = useState(false);
   const [contentWorlds, setcontentWorlds] = useState(0);
   const [image_url, setimage_url] = useState(
     "/images/defult_article_image.png"
@@ -58,7 +58,7 @@ export default function ADD() {
       try {
         (async () => {
           const { data } = await getSections();
-          sections = data;
+          setsections(data);
         })();
       } catch (error) {
         console.log(error);
@@ -290,10 +290,11 @@ export default function ADD() {
                 </option>
 
                 {sections &&
+                  typeof sections === "object" &&
                   sections.map((s, i) => {
                     return (
-                      <option key={i} value={s}>
-                        {s}
+                      <option key={i} value={s.SectionID}>
+                        {s.name}
                       </option>
                     );
                   })}
@@ -463,7 +464,7 @@ export default function ADD() {
                     description,
                     htmlcontent: htmlContent.replaceAll("<p></p>", "</br>"),
                     keyword,
-                    section,
+                    SectionID: section,
                   });
                   setMessage(data.message, "good");
                   return router.push("/writer");

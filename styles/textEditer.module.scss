@@ -180,6 +180,14 @@
         h6 {
           padding-top: 30px;
         }
+        li {
+          padding: 10px 0;
+        }
+        img {
+          width: 100%;
+          max-width: 600px;
+          margin: auto;
+        }
       }
       .button {
         text-align: center;
@@ -219,6 +227,7 @@
   }
   .editer_class {
     position: relative;
+    padding: 10px;
   }
 }
 
