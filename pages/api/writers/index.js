@@ -1,10 +1,10 @@
 import Writers from "../../../db/writers";
 import connect from "../../../middleware/connect";
 import bcrypt from "bcrypt";
-import { writersAuth } from "../../../middleware/auth";
+import { adminAuth } from "../../../middleware/auth";
 
 const apiRoute = connect
-  .use(writersAuth)
+  .use(adminAuth)
   .post(async (req, res) => {
     const { writer_Image, writer_name, writer_password } = req.body;
     if (

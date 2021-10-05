@@ -13,6 +13,9 @@ const Login = () => {
       const { data } = await login({ username, password });
       message.current.innerHTML = data.message;
       localStorage.setItem("token", data.token);
+      if (data.token_1) {
+        localStorage.setItem("token_1", data.token_1);
+      }
       window.location.replace("/writer");
     } catch (error) {
       const { data } = error.response;

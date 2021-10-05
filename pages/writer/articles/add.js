@@ -1,15 +1,20 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Head from "next/head";
 import { EditorState, convertToRaw } from "draft-js";
 import dynamic from "next/dynamic";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import style from "../../../styles/textEditer.module.scss";
-import { addarticle, UploadImage } from "../../../apiRequest/axios";
+import {
+  addarticle,
+  getSections,
+  UploadImage,
+} from "../../../apiRequest/axios";
 import draftToHtml from "draftjs-to-html";
 import SideBare from "../../../components/sideBare/sideBare";
 import { SEOtools } from "../../../components/SEOtools/SEOtools";
 import { FaExpandArrowsAlt, FaWindowClose } from "react-icons/fa";
 import ReactHtmlParser from "react-html-parser";
+import { useRouter } from "next/router";
 
 const Editor = dynamic(
   () => {
@@ -29,9 +34,13 @@ let keyWorld_count = 0;
 let keyWorld_density = 0;
 let linksCount = 0;
 
+let sections;
 export default function ADD() {
+  const router = useRouter();
+
   const [editorState, seteditorState] = useState(EditorState.createEmpty());
-  const [keyWorld, setkeyWorld] = useState("");
+  const [keyword, setkeyWord] = useState("");
+  const [section, setsection] = useState("");
   const [contentWorlds, setcontentWorlds] = useState(0);
   const [image_url, setimage_url] = useState(
     "/images/defult_article_image.png"
@@ -43,6 +52,19 @@ export default function ADD() {
   const text_editer = useRef(null);
   const close_icone = useRef(null);
   const articleview = useRef(null);
+
+  useEffect(() => {
+    if (!sections) {
+      try {
+        (async () => {
+          const { data } = await getSections();
+          sections = data;
+        })();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, []);
 
   const message = useRef(null);
   const setMessage = (M, good) => {
@@ -82,7 +104,7 @@ export default function ADD() {
     if (RowsContent.blocks) {
       RowsContent.blocks.forEach((item) => {
         if (item.type === "header-one") {
-          if (item.text.indexOf(keyWorld) !== -1) {
+          if (item.text.indexOf(keyword) !== -1) {
             status = true;
           }
         }
@@ -98,8 +120,8 @@ export default function ADD() {
         (item) => item.type === "unstyled"
       );
       if (allP[0]) {
-        if (allP[0].text.indexOf(keyWorld) !== -1) {
-          if (keyWorld === "") {
+        if (allP[0].text.indexOf(keyword) !== -1) {
+          if (keyword === "") {
             status = false;
           } else {
             status = true;
@@ -136,9 +158,9 @@ export default function ADD() {
       const count = world_With_Space.length;
       if (count !== contentWorlds) setcontentWorlds(count);
 
-      if (keyWorld !== "") {
+      if (keyword !== "") {
         keyWorld_count = world_With_Space.filter(
-          (item) => item === keyWorld
+          (item) => item === keyword
         ).length;
         keyWorld_density = Math.round((keyWorld_count / contentWorlds) * 100);
       } else {
@@ -246,8 +268,8 @@ export default function ADD() {
           }}
         >
           <SEOtools
-            keyWorld={keyWorld}
-            setkeyWorld={setkeyWorld}
+            keyword={keyword}
+            setkeyWord={setkeyWord}
             image_url={image_url}
             setimage_url={setimage_url}
             title_tag={title_tag}
@@ -255,7 +277,28 @@ export default function ADD() {
             description={description}
             setdescription={setdescription}
           />
+
           <ul>
+            <li>
+              <select
+                onChange={(e) => {
+                  setsection(e.target.value);
+                }}
+              >
+                <option value="" hidden>
+                  اختر القسم ...
+                </option>
+
+                {sections &&
+                  sections.map((s, i) => {
+                    return (
+                      <option key={i} value={s}>
+                        {s}
+                      </option>
+                    );
+                  })}
+              </select>
+            </li>
             <li>
               <span
                 style={{
@@ -274,8 +317,8 @@ export default function ADD() {
                 }}
               ></span>
               {keyworld_In_H1
-                ? `الكلمة المفتاحية (${keyWorld}) مستخدمة في الـ H1.`
-                : `الكلمة المفتاحية (${keyWorld}) غير موجودة في H1`}
+                ? `الكلمة المفتاحية (${keyword}) مستخدمة في الـ H1.`
+                : `الكلمة المفتاحية (${keyword}) غير موجودة في H1`}
             </li>
             <li>
               <span
@@ -307,8 +350,8 @@ export default function ADD() {
                 }}
               ></span>
               {keyworld_In_P
-                ? `الكلمة الرئيسية (${keyWorld}) مستخدمة في الفقرة الأولى للمقال`
-                : `الكلمة الرئيسية (${keyWorld}) لا تظهر في الفقرة الأولى للمقال`}
+                ? `الكلمة الرئيسية (${keyword}) مستخدمة في الفقرة الأولى للمقال`
+                : `الكلمة الرئيسية (${keyword}) لا تظهر في الفقرة الأولى للمقال`}
             </li>
             <li>
               <span
@@ -317,8 +360,8 @@ export default function ADD() {
                 }}
               ></span>
               {keyWorld_density < 1
-                ? `يجب ان تستخدم الكلمة المفتاحية (${keyWorld}) اكثر في الصفحة، لتحسين كثافة الكلمة المفتاحية، الكثافة حالياً ${keyWorld_density}`
-                : `كثافة الكلمات المفتاحية ممتازة، الكثافة الكالية(${keyWorld_density}%)، الكلمة المفتاحية (${keyWorld}) مستخدمة عدد ${keyWorld_count} من المرات.`}
+                ? `يجب ان تستخدم الكلمة المفتاحية (${keyword}) اكثر في الصفحة، لتحسين كثافة الكلمة المفتاحية، الكثافة حالياً ${keyWorld_density}`
+                : `كثافة الكلمات المفتاحية ممتازة، الكثافة الكالية(${keyWorld_density}%)، الكلمة المفتاحية (${keyword}) مستخدمة عدد ${keyWorld_count} من المرات.`}
             </li>
             <li>
               <span
@@ -346,44 +389,98 @@ export default function ADD() {
           </ul>
         </div>
         <button
-          onClick={async () => {
-            await addarticle({
-              title: title_tag,
-              imageurl: image_url,
-              description,
-              htmlcontent: htmlContent.replaceAll("<p></p>", "</br>"),
-              writer: "omar",
-            });
+          onClick={() => {
+            articleview.current.style.display = "block";
           }}
         >
           معاينة المقالة
         </button>
 
         <div ref={articleview} className={style.layout}>
+          <div className={style.nave}>
+            <span>المطرجي</span>
+            <span>التصنيفات</span>
+          </div>
           <FaWindowClose
             onClick={() => {
               articleview.current.style.display = "none";
             }}
           />
-          <h1>{title_tag}</h1>
-          <div className={style.main_img}>
-            <img src={image_url} />
-          </div>
-          {ReactHtmlParser(
-            htmlContent !== "" ? htmlContent.replaceAll("<p></p>", "</br>") : ""
-          )}
-          <p
-            style={{
-              textAlign: "center",
-              fontSize: "larger",
-              margin: "50px 15px",
-            }}
-          >
-            كاتب المقال : محمد مطرجي
-          </p>
-          <div>
-            <button>نشر</button>
-            <button>حذف</button>
+          <article>
+            <h1>{title_tag}</h1>
+            <div className={style.data_and_watch}>
+              <span>الآن</span>
+              <span>0 مشاهدة</span>
+            </div>
+            <div className={style.main_img}>
+              <img src={image_url} />
+            </div>
+            <div className={style.mainContext}>
+              {ReactHtmlParser(
+                htmlContent !== ""
+                  ? htmlContent.replaceAll("<p></p>", "</br>")
+                  : ""
+              )}
+            </div>
+            <p
+              style={{
+                textAlign: "center",
+                fontSize: "larger",
+                margin: "50px 15px",
+              }}
+            >
+              كاتب المقال : محمد مطرجي
+            </p>
+          </article>
+          <div className={style.button}>
+            <button
+              onClick={async (e) => {
+                const keys = [
+                  title_tag,
+                  image_url,
+                  description,
+                  htmlContent,
+                  keyword,
+                  section,
+                ];
+                let missing_Data = false;
+                keys.forEach((item) => {
+                  if (!item || item === "") {
+                    missing_Data = true;
+                  }
+                });
+                if (missing_Data) {
+                  return setMessage(
+                    "يجب ادخال كل من العنوان والوصف و المقال و الكلمة الرئيسية"
+                  );
+                }
+                try {
+                  e.target.disabled = true;
+                  e.target.innerHTML = "جاري النشر";
+                  const { data } = await addarticle({
+                    title: title_tag,
+                    imageurl: image_url,
+                    description,
+                    htmlcontent: htmlContent.replaceAll("<p></p>", "</br>"),
+                    keyword,
+                    section,
+                  });
+                  setMessage(data.message, "good");
+                  return router.push("/writer");
+                } catch (error) {
+                  if (error.response) {
+                    const { data } = error.response;
+                    setMessage(data.message);
+                  } else {
+                    setMessage("حصلت مشكلة اثناء التعديل");
+                  }
+                  e.target.innerHTML = "مشكلة ...";
+                  e.target.disabled = false;
+                }
+              }}
+            >
+              نشر
+            </button>
           </div>
         </div>
       </main>

@@ -2,8 +2,6 @@ import Writers from "../../../db/writers";
 import connect from "../../../middleware/connect";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import dotenv from "dotenv";
-dotenv.config();
 
 const apiRoute = connect.patch(async (req, res) => {
   const { username: name, password } = req.body;
@@ -17,13 +15,20 @@ const apiRoute = connect.patch(async (req, res) => {
         process.env.ADMIN_PASSWORD
       );
       if (isCorrecte_admin_password) {
-        const token = jwt.sign(
+        const token_1 = jwt.sign(
           { WriterID: 0, writer: "admin" },
           process.env.JWT_ADMIN_SECRET
         );
+        const token = jwt.sign(
+          { WriterID: 0, writer: "admin" },
+          process.env.JWT_SECRET
+        );
+        return res.status(200).json({ token, token_1, message: "مرحبا آدمن" });
+      } else {
+        return res.status(401).json({ message: `كلمة المرور خاطئة` });
       }
-      return res.status(200).json({ token, message: "مرحبا آدمن" });
     }
+
     const allwriters = await Writers.find({
       selectors: { name },
       columns: "name , password , WriterID",

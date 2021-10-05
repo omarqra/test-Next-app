@@ -249,7 +249,8 @@ export default function Home() {
                                 e.target.disabled === false;
                                 await reGetAllWriter();
                               } catch (error) {
-                                setMessage("حدثت مشكلة اثناء حذف الكاتب");
+                                const { data } = error.response;
+                                setMessage(data.message);
                                 e.target.disabled === false;
                               }
                             }}

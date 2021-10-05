@@ -3,18 +3,29 @@ import { writersAuth } from "../../../middleware/auth";
 import connect from "../../../middleware/connect";
 
 const apiRoute = connect
+  .use(writersAuth)
   .post(async (req, res) => {
-    const { title, htmlcontent, imageurl, description, writer } = req.body;
+    const writer = req.writer;
+    const { title, htmlcontent, imageurl, description, keyword } = req.body;
+
+    let missing_data = false;
+    const keys = ["keyword", "title", "htmlcontent", "imageurl", "description"];
+    keys.forEach((element) => {
+      if (req.body[element]) {
+        if (req.body[element] === "") {
+          missing_data = true;
+        }
+        return;
+      } else {
+        missing_data = true;
+      }
+    });
+    if (missing_data) {
+      res.status(500).json({ message: "هنالك معلومات ناقصة في المقال" });
+    }
     if (imageurl === "/images/defult_article_image.png") {
       return res.status(500).json({ message: "لا يجب نشر مقال بدون صورة" });
     }
-    Object.keys(req.body).forEach((element) => {
-      if (req.body[element] === "") {
-        return res
-          .status(500)
-          .json({ message: "هنالك معلومات ناقصة في المقال" });
-      }
-    });
     try {
       await Articles.save({
         title,
@@ -22,21 +33,26 @@ const apiRoute = connect
         imageurl,
         description,
         writer,
+        keyword,
       });
       return res.status(200).json({ message: "تم إضافة المقال بنجاح" });
     } catch (error) {
+      console.log(error);
       return res.status(500).json({ message: "حدثت مشكلة اثناء إضافة المقال" });
     }
   })
-  .use(writersAuth)
   .get(async (req, res) => {
     const writer = req.writer;
     try {
-      const allArticles = await Articles.find({
-        selectors: { writer },
-        columns: "ArticleID , title , writer",
-      });
-      res.status(200).json(allArticles);
+      if (writer === "admin") {
+        const allArticles = await Articles.find();
+        return res.status(200).json(allArticles);
+      } else {
+        const allArticles = await Articles.find({
+          selectors: { writer },
+          columns: "ArticleID , title , writer",
+        });
+      }
     } catch (error) {
       res.status(500).json({ message: `حدث مشكلة اثناء استدعاء المقالات` });
     }

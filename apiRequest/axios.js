@@ -4,7 +4,11 @@ const API = axios.create({ baseURL: "/api/" });
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("token")) {
     req.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
+    if (localStorage.getItem("token_1")) {
+      req.headers.Authorization_1 = `Bearer ${localStorage.getItem("token_1")}`;
+    }
   }
+
   return req;
 });
 
@@ -23,4 +27,10 @@ export const UploadImage = (data) =>
   });
 
 export const get_All_Article = () => API.get("articles");
+export const get_Article = (articleID) => API.get(`articles/${articleID}`);
 export const addarticle = (data) => API.post("articles", data);
+export const updatearticle = (data, articleID) =>
+  API.put(`articles/${articleID}`, data);
+export const deleteArticle = (articleID) => API.delete(`articles/${articleID}`);
+
+export const getSections = () => API.get("sections");

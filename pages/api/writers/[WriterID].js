@@ -1,10 +1,15 @@
 import Writers from "../../../db/writers";
 import connect from "../../../middleware/connect";
 import bcrypt from "bcrypt";
+import { adminAuth } from "../../../middleware/auth";
 
 const apiRoute = connect
+  .use(adminAuth)
   .delete(async (req, res) => {
     const { WriterID } = req.query;
+    if (WriterID === "1") {
+      return res.status(403).json({ message: `لا يمكن حذف الآدمن` });
+    }
     try {
       await Writers.delete({ WriterID });
       return res.status(200).json({ message: `تم حذف الكاتب` });

@@ -7,8 +7,8 @@ const green = "#79bf7e";
 const orange = "#eec066";
 
 export const SEOtools = ({
-  keyWorld,
-  setkeyWorld,
+  keyword,
+  setkeyWord,
   setimage_url,
   image_url,
   title_tag,
@@ -21,9 +21,9 @@ export const SEOtools = ({
       <div className={style.inputs}>
         <input
           placeholder="الكلمة الرئيسية ..."
-          value={keyWorld}
+          value={keyword}
           onChange={(e) => {
-            setkeyWorld(e.target.value);
+            setkeyWord(e.target.value);
           }}
           onFocus={(e) => {
             const childHeight =
@@ -62,30 +62,30 @@ export const SEOtools = ({
               <span
                 style={{
                   backgroundColor:
-                    title_tag.indexOf(keyWorld) === -1 || keyWorld === ""
+                    title_tag.indexOf(keyword) === -1 || keyword === ""
                       ? red
                       : green,
                 }}
               ></span>
-              {title_tag.indexOf(keyWorld) === -1 || keyWorld === ""
-                ? `الكلمة المفتاحية (${keyWorld}) لا تظهر في عنوان الصفحة.`
-                : `الكلمة المفتاحية (${keyWorld}) مستخدمة في عنوان الصفحة.`}
+              {title_tag.indexOf(keyword) === -1 || keyword === ""
+                ? `الكلمة المفتاحية (${keyword}) لا تظهر في عنوان الصفحة.`
+                : `الكلمة المفتاحية (${keyword}) مستخدمة في عنوان الصفحة.`}
             </li>
             <li>
               <span
                 style={{
                   backgroundColor:
-                    title_tag.indexOf(keyWorld) > 30 ||
-                    keyWorld === "" ||
-                    title_tag.indexOf(keyWorld) === -1
+                    title_tag.indexOf(keyword) > 30 ||
+                    keyword === "" ||
+                    title_tag.indexOf(keyword) === -1
                       ? red
                       : green,
                 }}
               ></span>
-              {-1 < title_tag.indexOf(keyWorld) &&
-              title_tag.indexOf(keyWorld) < 30
-                ? `الكلمة المفتاحية (${keyWorld}) مستخدمة في بداية العنوان.`
-                : `الكلمة المفتاحية (${keyWorld}) لا تظهر في بداية العنوان.`}
+              {-1 < title_tag.indexOf(keyword) &&
+              title_tag.indexOf(keyword) < 30
+                ? `الكلمة المفتاحية (${keyword}) مستخدمة في بداية العنوان.`
+                : `الكلمة المفتاحية (${keyword}) لا تظهر في بداية العنوان.`}
             </li>
             <li>
               <span
@@ -133,14 +133,14 @@ export const SEOtools = ({
               <span
                 style={{
                   backgroundColor:
-                    description.indexOf(keyWorld) === -1 || keyWorld === ""
+                    description.indexOf(keyword) === -1 || keyword === ""
                       ? red
                       : green,
                 }}
               ></span>
-              {description.indexOf(keyWorld) === -1 || keyWorld === ""
-                ? `الكملة الفمتاحية (${keyWorld}) لا تظهر في وصف الصفحة`
-                : `الكملة المفتاحية (${keyWorld}) مستخدمة في وصف الصفحة`}
+              {description.indexOf(keyword) === -1 || keyword === ""
+                ? `الكملة الفمتاحية (${keyword}) لا تظهر في وصف الصفحة`
+                : `الكملة المفتاحية (${keyword}) مستخدمة في وصف الصفحة`}
             </li>
             <li>
               <span
@@ -195,10 +195,6 @@ export const SEOtools = ({
           hidden
           type="file"
           onChange={async (e) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(e.target.files[0]);
-            reader.onload = () => setimage_url(reader.result);
-
             const Data = new FormData();
             Data.append("image", e.target.files[0]);
             try {

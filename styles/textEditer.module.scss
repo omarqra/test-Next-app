@@ -1,5 +1,12 @@
 .textEditer {
   display: flex;
+  select {
+    width: 100%;
+    max-width: 300px;
+    padding: 5px;
+    background-color: #fcfcfc;
+    color: #545454;
+  }
   .close_icone {
     color: #cf2e2e;
     position: fixed;
@@ -16,6 +23,7 @@
     position: fixed;
     left: 20px;
     bottom: 20px;
+    z-index: 4;
 
     color: #fcfcfc;
     background-color: #cf2e2e;
@@ -110,6 +118,46 @@
       width: 100%;
       top: 0;
       left: 0;
+      background-color: #fcfcfc;
+      overflow-y: scroll;
+      z-index: 3;
+
+      .nave {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 10%;
+        background-color: #222222;
+        color: #fcfcfc;
+        font-size: large;
+        span {
+          cursor: pointer;
+        }
+      }
+      & > svg {
+        cursor: pointer;
+        color: #cf2e2e;
+        font-size: larger;
+        right: 15px;
+        top: 15px;
+        position: absolute;
+      }
+      article {
+        & > h1 {
+          font-size: large;
+          padding: 20px 10px;
+        }
+      }
+      .data_and_watch {
+        display: flex;
+        justify-content: space-between;
+        span {
+          font-size: small;
+          color: #545454;
+          padding: 0 10px;
+        }
+      }
+
       .main_img {
         width: 100%;
         max-height: 50vh;
@@ -119,10 +167,39 @@
           width: 100%;
         }
       }
-      h1 {
-        &:first-of-type {
-          text-align: center;
+      .mainContext {
+        padding: 40px 20px;
+        p {
+          padding: 10px 0;
+        }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+          padding-top: 30px;
+        }
+      }
+      .button {
+        text-align: center;
+        button {
+          width: 100%;
+          max-width: 300px;
+          padding: 10px;
           margin: 10px 0;
+          cursor: pointer;
+
+          border: none;
+          outline: none;
+          box-shadow: 0 5px 5px -5px black;
+
+          font-size: large;
+          background-color: #cf2e2e;
+          color: #fcfcfc;
+          &:active {
+            box-shadow: none;
+          }
         }
       }
     }
@@ -142,5 +219,25 @@
   }
   .editer_class {
     position: relative;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .layout {
+    article {
+      & > h1 {
+        padding: 20px 5% !important;
+      }
+    }
+    .data_and_watch span {
+      padding: 5px 5% 5px 20% !important;
+    }
+    .main_img {
+      max-height: 70vh !important;
+    }
+    .mainContext {
+      width: 80%;
+      margin: auto;
+    }
   }
 }

@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import style from "./sidebar.module.scss";
 import { FaLock, FaBars } from "react-icons/fa";
 import Link from "next/link";
 import { FaHome, FaPlus, FaTools, FaUserTie } from "react-icons/fa";
 
+let admin = false;
 const SideBare = () => {
+  useEffect(() => {
+    if (localStorage.getItem("token_1")) {
+      admin = true;
+    }
+  }, []);
   return (
     <>
       <FaBars
@@ -38,13 +44,15 @@ const SideBare = () => {
               </a>
             </Link>
           </li>
-          <li>
-            <Link href="/writer">
-              <a>
-                <FaUserTie /> - صفحة الكتاب
-              </a>
-            </Link>
-          </li>
+          {admin && (
+            <li>
+              <Link href="/writer">
+                <a>
+                  <FaUserTie /> - صفحة الكتاب
+                </a>
+              </Link>
+            </li>
+          )}
           <li>
             <Link href="/writer/articles/add">
               <a>

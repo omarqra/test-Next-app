@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 import connect from "../../../middleware/connect";
-dotenv.config();
+// dotenv.config();
 
 const writersAuth = connect.get(async (req, res) => {
   if (!req.headers.authorization) {
@@ -14,6 +14,7 @@ const writersAuth = connect.get(async (req, res) => {
     return res.status(200).json({ message: "تم التوافق بنجاح" });
   } catch (error) {
     try {
+      const token = req.headers.authorization_1.split(" ")[1];
       const decodedData = jwt.verify(token, process.env.ADMIN_JWT_SECRET);
       req.writerID = decodedData.writerID;
       return res.status(200).json({ message: "تم التوافق بنجاح" });
