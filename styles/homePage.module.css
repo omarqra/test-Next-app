@@ -25,14 +25,20 @@
 .PrgOnImg:hover {
     background-color: #d44;
 }
-.detailsLinks {
+.detailsLinks, .detailsLinksS{
     font-size: large;
     display: block;
     margin: auto;
-    background-color: #0060e0;
     color: white;
     text-align: center;
     padding: 12px 0;
+}
+.detailsLinks {
+    background-color: #0060e0;
+}
+.detailsLinksS {
+    background-color: #CF2E2E;
+    margin:20px 0 ;
 }
 
 .homeSideAndTopics{
@@ -70,11 +76,22 @@
         width: 547px;
         font-size:x-large;
     }
-    .detailsLinks {
+    .detailsLinks{
         font-size: x-large;
         padding: 24px 0;
     }
     .PrgOnImg {
         bottom: 5%;
+    }
+    .detailsLinksS {
+        font-size: x-large;
+        padding: 24px 0;
+        /* background-color: #0060e0; */
+    }
+    .detailsLinksS[location = "top"] {
+        margin: 40px 0 0 0;
+    }
+    .detailsLinksS[location = "bottom"] {
+        margin: 0 0 40px 0;
     }
 }
