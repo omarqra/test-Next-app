@@ -10,7 +10,7 @@
     position: absolute;
     z-index: 1;
     width: 70%;
-    font-size: 12px;
+    font-size: medium;
     background-color: #CF2E2E;
     color: white;
     text-align: center;
@@ -52,8 +52,8 @@
         font-size: 16px;
     }
     .detailsLinks {
-        font-size: x-large;
-        padding: 20px 0;
+        font-size: larger;
+        padding: 10px 0;
     }
     .homePackground {
         margin: 25px 0 70px 0;
@@ -62,26 +62,22 @@
     .PrgOnImg {
         padding: 17px 0;
         width: 510px;
-        font-size:larger;
+        font-size:x-large;
         bottom: 1%;
     }
 }
 @media screen and (min-width: 1024px) {
     .homePackground {
         margin: 25px 0 110px 0;
-        height: 504px;
+        height: 535px;
     }
     .PrgOnImg {
         padding: 17px 0;
         width: 547px;
         font-size:x-large;
     }
-    .detailsLinks{
-        font-size: x-large;
-        padding: 24px 0;
-    }
     .PrgOnImg {
-        bottom: 5%;
+        bottom: 3%;
     }
     .detailsLinksS {
         font-size: x-large;
