@@ -1,22 +1,29 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { UploadImage } from "../../apiRequest/axios";
 import style from "./seotools.module.scss";
 
 const red = "#f97a7a";
 const green = "#79bf7e";
 const orange = "#eec066";
 
-export const SEOtools = ({ keyWorld, setkeyWorld }) => {
-  const [title_tag, settitle_tag] = useState("");
-  const [description, setdescription] = useState("");
-
+export const SEOtools = ({
+  keyword,
+  setkeyWord,
+  setimage_url,
+  image_url,
+  title_tag,
+  settitle_tag,
+  description,
+  setdescription,
+}) => {
   return (
-    <div className={style.seotools}>
+    <>
       <div className={style.inputs}>
         <input
           placeholder="الكلمة الرئيسية ..."
-          value={keyWorld}
+          value={keyword}
           onChange={(e) => {
-            setkeyWorld(e.target.value);
+            setkeyWord(e.target.value);
           }}
           onFocus={(e) => {
             const childHeight =
@@ -55,30 +62,30 @@ export const SEOtools = ({ keyWorld, setkeyWorld }) => {
               <span
                 style={{
                   backgroundColor:
-                    title_tag.indexOf(keyWorld) === -1 || keyWorld === ""
+                    title_tag.indexOf(keyword) === -1 || keyword === ""
                       ? red
                       : green,
                 }}
               ></span>
-              {title_tag.indexOf(keyWorld) === -1 || keyWorld === ""
-                ? `الكلمة المفتاحية (${keyWorld}) لا تظهر في عنوان الصفحة.`
-                : `الكلمة المفتاحية (${keyWorld}) مستخدمة في عنوان الصفحة.`}
+              {title_tag.indexOf(keyword) === -1 || keyword === ""
+                ? `الكلمة المفتاحية (${keyword}) لا تظهر في عنوان الصفحة.`
+                : `الكلمة المفتاحية (${keyword}) مستخدمة في عنوان الصفحة.`}
             </li>
             <li>
               <span
                 style={{
                   backgroundColor:
-                    title_tag.indexOf(keyWorld) > 30 ||
-                    keyWorld === "" ||
-                    title_tag.indexOf(keyWorld) === -1
+                    title_tag.indexOf(keyword) > 30 ||
+                    keyword === "" ||
+                    title_tag.indexOf(keyword) === -1
                       ? red
                       : green,
                 }}
               ></span>
-              {-1 < title_tag.indexOf(keyWorld) &&
-              title_tag.indexOf(keyWorld) < 30
-                ? `الكلمة المفتاحية (${keyWorld}) مستخدمة في بداية العنوان.`
-                : `الكلمة المفتاحية (${keyWorld}) لا تظهر في بداية العنوان.`}
+              {-1 < title_tag.indexOf(keyword) &&
+              title_tag.indexOf(keyword) < 30
+                ? `الكلمة المفتاحية (${keyword}) مستخدمة في بداية العنوان.`
+                : `الكلمة المفتاحية (${keyword}) لا تظهر في بداية العنوان.`}
             </li>
             <li>
               <span
@@ -126,14 +133,14 @@ export const SEOtools = ({ keyWorld, setkeyWorld }) => {
               <span
                 style={{
                   backgroundColor:
-                    description.indexOf(keyWorld) === -1 || keyWorld === ""
+                    description.indexOf(keyword) === -1 || keyword === ""
                       ? red
                       : green,
                 }}
               ></span>
-              {description.indexOf(keyWorld) === -1 || keyWorld === ""
-                ? `الكملة الفمتاحية (${keyWorld}) لا تظهر في وصف الصفحة`
-                : `الكملة المفتاحية (${keyWorld}) مستخدمة في وصف الصفحة`}
+              {description.indexOf(keyword) === -1 || keyword === ""
+                ? `الكملة الفمتاحية (${keyword}) لا تظهر في وصف الصفحة`
+                : `الكملة المفتاحية (${keyword}) مستخدمة في وصف الصفحة`}
             </li>
             <li>
               <span
@@ -170,10 +177,35 @@ export const SEOtools = ({ keyWorld, setkeyWorld }) => {
         </div>
         <div className={style.preview_content}>
           {description === ""
-            ? " استخدم مربع الادخال لكتابة عنوان ووصف للصفحة. هذا المربع يظهر لك كيف ستبدوا هذه الصفحة في بحث جوجل."
+            ? " استخدم مربع الادخال لكتابة عنوان ووصف للصفحة. هذه الفقرة تظهر لك كيف ستبدوا هذه الصفحة في بحث جوجل."
             : description}
         </div>
       </div>
-    </div>
+      <div className={style.article_image}>
+        <span>
+          <img
+            src={image_url}
+            alt="عارض صورة المقال"
+            onClick={(e) => {
+              e.target.parentNode.nextSibling.click();
+            }}
+          />
+        </span>
+        <input
+          hidden
+          type="file"
+          onChange={async (e) => {
+            const Data = new FormData();
+            Data.append("image", e.target.files[0]);
+            try {
+              const { data } = await UploadImage(Data);
+              setimage_url(data.imageUrl);
+            } catch (error) {
+              console.log(error);
+            }
+          }}
+        />
+      </div>
+    </>
   );
 };

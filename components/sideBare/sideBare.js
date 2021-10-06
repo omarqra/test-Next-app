@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import style from "./sidebar.module.scss";
 import { FaLock, FaBars } from "react-icons/fa";
 import Link from "next/link";
 import { FaHome, FaPlus, FaTools, FaUserTie } from "react-icons/fa";
 
 const SideBare = () => {
+  const [admin, setadmin] = useState(false);
+  useEffect(() => {
+    if (localStorage.getItem("token_1")) {
+      setadmin(true);
+    }
+  }, []);
   return (
     <>
       <FaBars
@@ -38,22 +44,33 @@ const SideBare = () => {
               </a>
             </Link>
           </li>
+          {admin && (
+            <li>
+              <Link href="/writer">
+                <a>
+                  <FaUserTie /> - صفحة الكتاب
+                </a>
+              </Link>
+            </li>
+          )}
+          {admin && (
+            <li>
+              <Link href="/writer/sections">
+                <a>
+                  <FaUserTie /> - صفحة الاقسام
+                </a>
+              </Link>
+            </li>
+          )}
           <li>
-            <Link href="/writer">
-              <a>
-                <FaUserTie /> - صفحة الكتاب
-              </a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/writer/add">
+            <Link href="/writer/articles/add">
               <a>
                 <FaPlus /> - مقالة جديدة
               </a>
             </Link>
           </li>
           <li>
-            <Link href="/writer/writing_tools/update">
+            <Link href="/writer/articles/update">
               <a>
                 <FaTools /> - تعديل او حذف مقال
               </a>

@@ -7,7 +7,12 @@ const upload = multer({
       let ext = ".jpeg";
       if (file.mimetype === "image/svg+xml") {
         ext = ".svg";
+      } else if (file.mimetype === "image/png") {
+        ext = ".png";
+      } else if (file.mimetype === "image/jpeg") {
+        ext = ".jpeg";
       }
+
       cb(null, file.originalname.split(".")[0] + "-" + Date.now() + ext);
     },
   }),

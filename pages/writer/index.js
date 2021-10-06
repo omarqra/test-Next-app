@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import SideBare from "../../components/sideBare/sideBare";
 import {
   addWriter,
-  deleteImage,
   deteteWriter,
   getAllWriters,
+  updateWriter,
   UploadImage,
 } from "../../apiRequest/axios";
 
@@ -16,6 +16,8 @@ export default function Home() {
   );
   const [writer_name, setwriter_name] = useState("");
   const [writer_password, setwriter_password] = useState("");
+
+  const [update, setUpdate] = useState(false);
 
   const message = useRef(null);
   const setMessage = (M, good) => {
@@ -37,7 +39,10 @@ export default function Home() {
       const { data } = await getAllWriters();
       setUsers(data);
     } catch (error) {
-      console.log(error);
+      const { data } = error.response;
+      if (data.message === "قم بتسجيل الدخول اولا")
+        window.location = "/writer/login";
+      return;
     }
   };
   useEffect(() => {
@@ -46,41 +51,72 @@ export default function Home() {
 
   const hundlsubmit = async (e) => {
     e.preventDefault();
-    if (
-      writer_name === "" ||
-      writer_password === "" ||
-      writer_password.length < 5
-    ) {
-      setMessage(" يجب ادخال صورة ،واسم ،وكلمة سر اكبر من 5 حروف.");
-      return;
-    }
-    submit.current.disabled = true;
     try {
-      const { data } = await addWriter({
-        writer_Image,
-        writer_name,
-        writer_password,
-      });
-      setMessage(data.message, "جيد");
+      let data_res;
+      if (update) {
+        const date_to_update = {};
+        if (writer_name !== "") {
+          date_to_update.writer_name = writer_name;
+        }
+        if (
+          writer_Image !== "" &&
+          writer_Image !== "/images/defult-user-image.svg"
+        ) {
+          date_to_update.writer_Image = writer_Image;
+        }
+        if (writer_password !== "") {
+          date_to_update.writer_password = writer_password;
+        }
+        if (
+          (writer_Image !== "" &&
+            writer_Image !== "/images/defult-user-image.svg") ||
+          writer_password !== "" ||
+          writer_name !== ""
+        ) {
+          submit.current.disabled = true;
+          const { data } = await updateWriter(date_to_update, update);
+          data_res = data;
+          setUpdate(false);
+        }
+      } else {
+        if (
+          writer_name === "" ||
+          writer_password === "" ||
+          writer_password.length < 5
+        ) {
+          setMessage(" يجب ادخال صورة ،واسم ،وكلمة سر اكبر من 5 حروف.");
+          return;
+        }
+        submit.current.disabled = true;
+
+        const { data } = await addWriter({
+          writer_Image,
+          writer_name,
+          writer_password,
+        });
+        data_res = data;
+      }
+      setMessage(data_res.message, "جيد");
       submit.current.disabled = false;
       setwriter_Image("/images/defult-user-image.svg");
       setwriter_name("");
       setwriter_password("");
       await reGetAllWriter();
     } catch (error) {
-      console.log(error);
       submit.current.disabled = false;
-      setMessage(error.message);
+      const { data } = error.response;
+      setMessage(data.message | data);
     }
   };
+
   const handleImage = async (e) => {
     const Data = new FormData();
     Data.append("image", e.target.files[0]);
     try {
       const { data } = await UploadImage(Data);
-      setwriter_Image(data.imageUrl);
+      return setwriter_Image(data.imageUrl);
     } catch (error) {
-      console.log(error);
+      return console.log({ error });
     }
   };
   return (
@@ -131,6 +167,7 @@ export default function Home() {
                   setwriter_name(e.target.value);
                 }}
                 value={writer_name}
+                name="username"
                 type="text"
                 placeholder="اسم الكاتب"
               />
@@ -140,10 +177,28 @@ export default function Home() {
                 }}
                 value={writer_password}
                 type="password"
-                placeholder="كلمة سر الكاتب"
+                name="password"
+                autoComplete="on"
+                placeholder={
+                  update ? "كلمة سر الكاتب ، غير الزامية" : "كلمة سر الكاتب"
+                }
               />
             </div>
-            <input type="submit" ref={submit} />
+            <input
+              type="submit"
+              ref={submit}
+              value={update ? "تعديل" : "إضافة"}
+            />
+            <span
+              onClick={() => {
+                setUpdate(false);
+                setwriter_Image("/images/defult-user-image.svg");
+                setwriter_name("");
+                setwriter_password("");
+              }}
+            >
+              {update && "X"}
+            </span>
           </form>
         </div>
         <div className={style.second}>
@@ -173,7 +228,16 @@ export default function Home() {
                       </th>
                       <th>
                         <div>
-                          <button>تعديل</button>
+                          <button
+                            onClick={() => {
+                              setUpdate(item.WriterID);
+                              setwriter_Image(item.imageUrl);
+                              setwriter_name(item.name);
+                              setwriter_password("");
+                            }}
+                          >
+                            تعديل
+                          </button>
                           <button
                             onClick={async (e) => {
                               e.target.disabled === true;
@@ -185,7 +249,8 @@ export default function Home() {
                                 e.target.disabled === false;
                                 await reGetAllWriter();
                               } catch (error) {
-                                setMessage("حدثت مشكلة اثناء حذف الكاتب");
+                                const { data } = error.response;
+                                setMessage(data.message);
                                 e.target.disabled === false;
                               }
                             }}

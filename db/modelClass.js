@@ -137,6 +137,7 @@ class Model {
       const result = await this.db(
         `SELECT ${columns || "*"} FROM ${this.table}`
       );
+
       return result;
     } else if (typeof selectors === "string") {
       const result = await this.db(
