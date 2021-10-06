@@ -3,7 +3,7 @@ import { adminAuth } from "../../../middleware/auth";
 import Section from "../../../db/section";
 import Articles from "../../../db/articles";
 
-const apiRoute = connect
+const apiRoute = connect()
   .use(adminAuth)
   .delete(async (req, res) => {
     const { SectionID } = req.query;

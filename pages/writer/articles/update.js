@@ -57,6 +57,18 @@ const Update = () => {
     })();
   }, []);
 
+  const extract_SectionName = (SectionID) => {
+    let name;
+    if (Sections) {
+      const theSection = Sections.forEach((item) => {
+        if (item.SectionID === SectionID) {
+          name = item.name;
+        }
+      });
+      return name;
+    }
+  };
+
   return (
     <div className={style.update}>
       <span
@@ -75,67 +87,81 @@ const Update = () => {
       <SideBare />
       <main>
         <h1>تعديل مقالة</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>الرقم</th>
-              <th>العنوان</th>
-              <th>القسم</th>
-              <th>الكاتب</th>
-              <th>حذف / تعديل</th>
-            </tr>
-          </thead>
-          <tbody>
-            {articles.length > 0 &&
-              typeof articles === "object" &&
-              articles.map((item) => {
-                return (
-                  <tr key={`article_${item.ArticleID}`}>
-                    <th>{item.ArticleID}</th>
-                    <th>{item.title}</th>
-                    <th>{item.writer}</th>
-                    <th>
-                      <button
-                        onClick={async () => {
-                          const { data } = await get_Article(item.ArticleID);
-                          setarticle(data);
-                        }}
-                      >
-                        تعديل
-                      </button>
-                      <button
-                        onClick={async () => {
-                          try {
-                            const { data } = await deleteArticle(
-                              item.ArticleID
-                            );
-                            getArticles();
-                            setMessage(data.message, "good");
-                          } catch (error) {
-                            const { data } = error.response;
-                            setMessage(data.message);
-                          }
-                        }}
-                      >
-                        حذف
-                      </button>
-                    </th>
-                  </tr>
-                );
-              })}
-          </tbody>
-        </table>
+        {!article && (
+          <table>
+            <thead>
+              <tr>
+                <th>الرقم</th>
+                <th>العنوان</th>
+                <th>القسم</th>
+                <th>الكاتب</th>
+                <th>حذف / تعديل</th>
+              </tr>
+            </thead>
+            <tbody>
+              {articles.length > 0 &&
+                typeof articles === "object" &&
+                articles.map((item) => {
+                  return (
+                    <tr key={`article_${item.ArticleID}`}>
+                      <th>{item.ArticleID}</th>
+                      <th>{item.title}</th>
+                      <th>{item.writer}</th>
+                      <th>{extract_SectionName(item.SectionID)}</th>
+
+                      <th>
+                        <button
+                          onClick={async () => {
+                            const { data } = await get_Article(item.ArticleID);
+                            setarticle(data);
+                          }}
+                        >
+                          تعديل
+                        </button>
+                        <button
+                          onClick={async () => {
+                            try {
+                              const { data } = await deleteArticle(
+                                item.ArticleID
+                              );
+                              getArticles();
+                              setMessage(data.message, "good");
+                            } catch (error) {
+                              const { data } = error.response;
+                              setMessage(data.message);
+                            }
+                          }}
+                        >
+                          حذف
+                        </button>
+                      </th>
+                    </tr>
+                  );
+                })}
+            </tbody>
+          </table>
+        )}
         {articles.length === 0 && typeof articles === "object" && (
           <span>ليس هنالك اي مقال</span>
         )}
-
         {article && (
-          <Update_article
-            article={article}
-            message={message}
-            setMessage={setMessage}
-            Sections={Sections}
-          />
+          <>
+            <div
+              className={style.closeUpdata}
+              onClick={() => {
+                setarticle(false);
+              }}
+            >
+              x
+            </div>
+            <Update_article
+              article={article}
+              message={message}
+              setMessage={setMessage}
+              Sections={Sections}
+              setSections={setSections}
+            />
+          </>
         )}
       </main>
     </div>

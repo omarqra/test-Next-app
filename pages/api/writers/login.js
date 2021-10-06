@@ -3,7 +3,7 @@ import connect from "../../../middleware/connect";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
-const apiRoute = connect.patch(async (req, res) => {
+const apiRoute = connect().patch(async (req, res) => {
   const { username: name, password } = req.body;
   if (!name || name === "" || !password || password.length < 5) {
     return res.status(401).json({ message: `هنالك معلومات ناقصة` });

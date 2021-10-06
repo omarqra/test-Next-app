@@ -2,7 +2,7 @@ import Articles from "../../../db/articles";
 import { writersAuth } from "../../../middleware/auth";
 import connect from "../../../middleware/connect";
 
-const apiRoute = connect
+const apiRoute = connect()
   .use(writersAuth)
   .post(async (req, res) => {
     const writer = req.writer;

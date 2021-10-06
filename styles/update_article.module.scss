@@ -39,5 +39,65 @@
         }
       }
     }
+    table {
+      width: 100%;
+      max-width: 768px;
+      margin: 40px auto 60px;
+      border-collapse: collapse;
+      th {
+        padding: 10px;
+      }
+      thead {
+        background-color: #4688d2;
+        th {
+          font-size: large;
+          color: #fcfcfc;
+        }
+      }
+      tbody {
+        tr {
+          &:nth-child(even) {
+            background-color: #cfcfcf;
+            color: #222222;
+          }
+          &:nth-child(odd) {
+            background-color: #222222;
+            color: #ffffffe5;
+          }
+          button {
+            color: #fcfcfc;
+            border: none;
+            outline: none;
+            border-radius: 0;
+            width: 50px;
+            cursor: pointer;
+            box-shadow: 0px 0px 5px black;
+            &:active {
+              box-shadow: none;
+            }
+
+            &:first-of-type {
+              background-color: #4688d2;
+            }
+            &:last-of-type {
+              margin-right: 10px;
+              background-color: #cf2e2e;
+            }
+            &:hover {
+              background-color: #cfcfcf;
+              color: #222222;
+            }
+          }
+        }
+      }
+    }
+    .closeUpdata {
+      position: absolute;
+      top: 25px;
+      left: 20px;
+      font-size: xx-large;
+      color: #cf2e2e;
+      cursor: pointer;
+    }
   }
 }

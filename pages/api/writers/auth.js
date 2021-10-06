@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import connect from "../../../middleware/connect";
 // dotenv.config();
 
-const writersAuth = connect.get(async (req, res) => {
+const writersAuth = connect().get(async (req, res) => {
   if (!req.headers.authorization) {
     return res.status(401).json({ message: "لم يتم التوافق" });
   }

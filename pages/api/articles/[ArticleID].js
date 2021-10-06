@@ -2,7 +2,7 @@ import Articles from "../../../db/articles";
 import { writersAuth } from "../../../middleware/auth";
 import connect from "../../../middleware/connect";
 
-const apiRoute = connect
+const apiRoute = connect()
   .get(async (req, res) => {
     const { ArticleID } = req.query;
     try {
@@ -34,7 +34,14 @@ const apiRoute = connect
     const { ArticleID } = req.query;
     const { imageurl } = req.body;
     try {
-      const allKeys = ["title", "htmlcontent", "imageurl", "description"];
+      const allKeys = [
+        "title",
+        "htmlcontent",
+        "imageurl",
+        "description",
+        "keyword",
+        "SectionID",
+      ];
       let article_Update_Data = {};
       allKeys.forEach((key) => {
         if (req.body[key] && req.body[key] !== "") {
@@ -54,6 +61,7 @@ const apiRoute = connect
       await Articles.update({ ArticleID }, article_Update_Data);
       return res.status(200).json({ message: `تم تعديل المقال` });
     } catch (error) {
+      console.log({ error });
       return res.status(500).json({ message: `حدثت مشكلة اثناء تعديل المقال` });
     }
   });

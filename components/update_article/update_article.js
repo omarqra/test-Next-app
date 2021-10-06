@@ -34,7 +34,7 @@ let keyWorld_count = 0;
 let keyWorld_density = 0;
 let linksCount = 0;
 
-export default function Update_article({ article, message, setMessage }) {
+export default function Update_article({ article, setMessage, Sections }) {
   const router = useRouter();
 
   const [editorState, seteditorState] = useState(EditorState.createEmpty());
@@ -45,6 +45,7 @@ export default function Update_article({ article, message, setMessage }) {
   );
   const [title_tag, settitle_tag] = useState("");
   const [description, setdescription] = useState("");
+  const [section, setsection] = useState("");
   const [render, setRender] = useState(0);
 
   const text_editer = useRef(null);
@@ -63,6 +64,7 @@ export default function Update_article({ article, message, setMessage }) {
     setdescription(article.description);
     setimage_url(article.imageurl);
     setkeyWord(article.keyword);
+    setsection(article.SectionID);
   }, [article]);
 
   const onEditorStateChange = (editorState) => {
@@ -159,8 +161,6 @@ export default function Update_article({ article, message, setMessage }) {
 
   return (
     <div className={style.main}>
-      <h1>تعديل مقالة</h1>
-
       <div
         ref={text_editer}
         onKeyUp={(e) => {
@@ -257,14 +257,15 @@ export default function Update_article({ article, message, setMessage }) {
               onChange={(e) => {
                 setsection(e.target.value);
               }}
+              value={section}
             >
               <option value="" hidden>
                 اختر القسم ...
               </option>
 
-              {sections &&
-                typeof sections === "object" &&
-                sections.map((s, i) => {
+              {Sections &&
+                typeof Sections === "object" &&
+                Sections.map((s, i) => {
                   return (
                     <option key={i} value={s.SectionID}>
                       {s.name}
@@ -415,6 +416,7 @@ export default function Update_article({ article, message, setMessage }) {
                 description,
                 htmlContent,
                 keyword,
+                section,
               ];
               let missing_Data = false;
               keys.forEach((item) => {
@@ -424,7 +426,7 @@ export default function Update_article({ article, message, setMessage }) {
               });
               if (missing_Data) {
                 return setMessage(
-                  "يجب ادخال كل من العنوان والوصف و المقال و الكلمة الرئيسية"
+                  " يجب ادخال كل من العنوان والوصف و المقال و الكلمة الرئيسية والقسم"
                 );
               }
               try {
@@ -437,6 +439,7 @@ export default function Update_article({ article, message, setMessage }) {
                     description,
                     htmlcontent: htmlContent.replaceAll("<p></p>", "</br>"),
                     keyword,
+                    SectionID: section,
                   },
                   article.ArticleID
                 );

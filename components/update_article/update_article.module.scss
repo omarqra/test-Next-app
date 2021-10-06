@@ -25,6 +25,13 @@
   z-index: 5;
 }
 .main {
+  select {
+    width: 100%;
+    max-width: 300px;
+    padding: 5px;
+    background-color: #fcfcfc;
+    color: #545454;
+  }
   & > h1 {
     text-align: center;
     margin: 0 0 20px;
@@ -173,6 +180,17 @@
       h5,
       h6 {
         padding-top: 30px;
+      }
+      li {
+        padding: 10px 0;
+      }
+      div {
+        text-align: center;
+        img {
+          width: 100%;
+          max-width: 600px;
+          margin: auto;
+        }
       }
     }
     .button {

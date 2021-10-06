@@ -3,7 +3,7 @@ import connect from "../../../middleware/connect";
 import bcrypt from "bcrypt";
 import { adminAuth } from "../../../middleware/auth";
 
-const apiRoute = connect
+const apiRoute = connect()
   .use(adminAuth)
   .post(async (req, res) => {
     const { writer_Image, writer_name, writer_password } = req.body;

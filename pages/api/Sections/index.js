@@ -2,7 +2,7 @@ import Section from "../../../db/section";
 import { adminAuth, writersAuth } from "../../../middleware/auth";
 import connect from "../../../middleware/connect";
 
-const apiRoute = connect
+const apiRoute = connect()
   .get(async (req, res) => {
     try {
       const data = await Section.find();
