@@ -1,5 +1,6 @@
+import { useRef, useEffect } from "react";
 import classes from "./Box.module.css"
-const Box = ({title, text}) => {
+const Box = ({title, text, isOpen}) => {
     let state = false;
     const fixClick = (e) => {
         state = !state;
@@ -9,15 +10,22 @@ const Box = ({title, text}) => {
         else {
             e.target.nextSibling.style.height = "0";
         }
-
     }
+    // console.log(pg.current.parentNode.style.height);
+    const pg = useRef(null);
+    useEffect(() => {
+        if (isOpen) {
+            state = true;
+            pg.current.parentNode.style.height = `${pg.current.clientHeight}px`;
+        }
+    }, [])
     return (
-        <div className={classes.box} onClick={fixClick}>
-            <h3 className={classes.boxTitle}>
+        <div className={classes.box}>
+            <h3 className={classes.boxTitle} onClick={fixClick}>
                     {title}
             </h3>
             <div className={classes.boxTextShow}>
-                <p>
+                <p ref={pg}>
                     {text}
                 </p>
             </div>

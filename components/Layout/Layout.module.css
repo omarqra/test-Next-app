@@ -14,13 +14,13 @@
 .navContentHeader {
     padding: 0;
     margin: 0;
-    font-size: 22px;
+    font-size: large;
 }
 .dropdown{
     position: relative;
-    padding-top: 32px;
+    padding-top: 21px;
     padding-bottom: 7px;
-    font-size: 18px;
+    font-size: medium;
     cursor: pointer;
 }
 .dropdownList {
@@ -33,7 +33,7 @@
     z-index: 1;
     background-color: #666;
     left: -10px;
-    top: 73px;
+    top: 58px;
 }
 .dropdown:hover .dropdownList {
     display: block;
@@ -41,12 +41,12 @@
 
 @media screen and (min-width: 768px) {
     .navContentHeader {
-        font-size: 30px;
+        font-size: larger;
     }
     .dropdown{
-        font-size: 22px;
+        font-size: 18px;
     }
     .dropdownList {
-        top: 81px;
+        top: 62px;
     }
 }

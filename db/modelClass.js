@@ -18,7 +18,7 @@ class Model {
     this.colons = colons;
     this.db = db;
   }
-
+  
   async dropTable() {
     const drop = async () => {
       try {

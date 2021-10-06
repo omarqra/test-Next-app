@@ -31,7 +31,7 @@ const About = () => {
                 </div>
             </div>
             <div className={classes.BoxesList} >
-                <Box title={Boxes.ourView.title} text={Boxes.ourView.text} />
+                <Box title={Boxes.ourView.title} text={Boxes.ourView.text} isOpen={true} />
                 <Box title={Boxes.message.title} text={Boxes.message.text} />
                 <Box title={Boxes.goals.title} text={Boxes.goals.text} />
                 <Box title={Boxes.ourValues.title} text={Boxes.ourValues.text} />
