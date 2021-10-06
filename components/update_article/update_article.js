@@ -444,7 +444,7 @@ export default function Update_article({ article, setMessage, Sections }) {
                   article.ArticleID
                 );
                 setMessage(data.message, "good");
-                return router.push("/writer");
+                return router.reload();
               } catch (error) {
                 if (error.response) {
                   const { data } = error.response;

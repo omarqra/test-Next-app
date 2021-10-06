@@ -127,8 +127,15 @@ const Update = () => {
                               getArticles();
                               setMessage(data.message, "good");
                             } catch (error) {
-                              const { data } = error.response;
-                              setMessage(data.message);
+                              if (error.response) {
+                                const { data } = error.response;
+                                setMessage(data.message);
+                                if (data.message === "قم بتسجيل الدخول اولا") {
+                                  window.location = "/writer/login";
+                                } else {
+                                  setMessage("حصلت مشكلة أثناء حذف المقال");
+                                }
+                              }
                             }
                           }}
                         >

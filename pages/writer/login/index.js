@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { auth, login } from "../../../apiRequest/axios";
+import style from "../../../styles/login.module.scss";
 
 const Login = () => {
   const [username, setusername] = useState("");
@@ -16,10 +17,12 @@ const Login = () => {
       if (data.token_1) {
         localStorage.setItem("token_1", data.token_1);
       }
-      window.location.replace("/writer");
+      window.location.replace("/writer/articles/update");
     } catch (error) {
-      const { data } = error.response;
-      message.current.innerHTML = data.message;
+      if (error.response) {
+        const { data } = error.response;
+        message.current.innerHTML = data.message;
+      }
     }
   };
 
@@ -28,7 +31,7 @@ const Login = () => {
       (async () => {
         try {
           await auth();
-          window.location.replace("/writer");
+          window.location.replace("/writer/articles/update");
         } catch (error) {
           localStorage.clear();
         }
@@ -38,11 +41,14 @@ const Login = () => {
 
   return (
     <form
+      className={style.loginForm}
       onSubmit={(e) => {
         handlesubmit(e);
       }}
     >
+      <span>خبر ومقال</span>
       <input
+        placeholder="اسم المستخدم"
         name="username"
         onChange={(e) => {
           setusername(e.target.value);
@@ -50,6 +56,7 @@ const Login = () => {
         value={username}
       />
       <input
+        placeholder="كلمة السر"
         name="password"
         type="password"
         value={password}

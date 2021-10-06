@@ -48,6 +48,9 @@ const Sections = () => {
     } catch (error) {
       if (error.response) {
         const { data } = error.response;
+        if (data.message === "قم بتسجيل الدخول اولا") {
+          window.location = "/writer/login";
+        }
         submit_button.current.value = data.message;
       } else {
         setMessage("حصلت مشكلة اثناء التعديل");
@@ -62,11 +65,20 @@ const Sections = () => {
       const { data } = await getSections();
       setSections(data);
     } catch (error) {
+      if (error.response) {
+        const { data } = error.response;
+        if (data.message === "قم بتسجيل الدخول اولا") {
+          window.location = "/writer/login";
+        }
+      }
       setMessage("مشكلة في استدعاء الاقسام");
     }
   };
   const [Sections, setSections] = useState([]);
   useEffect(() => {
+    if (!localStorage.getItem("token_1")) {
+      window.location.replace("/writer/articles/update");
+    }
     regetSections();
   }, []);
 
@@ -148,6 +160,9 @@ const Sections = () => {
                             } catch (error) {
                               if (error.response) {
                                 const { data } = error.response;
+                                if (data.message === "قم بتسجيل الدخول اولا") {
+                                  window.location = "/writer/login";
+                                }
                                 submit_button.current.value = data.message;
                               } else {
                                 setMessage("حصلت مشكلة اثناء التعديل");

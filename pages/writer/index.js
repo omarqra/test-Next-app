@@ -39,10 +39,12 @@ export default function Home() {
       const { data } = await getAllWriters();
       setUsers(data);
     } catch (error) {
-      const { data } = error.response;
-      if (data.message === "قم بتسجيل الدخول اولا")
-        window.location = "/writer/login";
-      return;
+      if (error.response) {
+        const { data } = error.response;
+        if (data.message === "قم بتسجيل الدخول اولا") {
+          window.location = "/writer/login";
+        }
+      }
     }
   };
   useEffect(() => {
@@ -104,8 +106,15 @@ export default function Home() {
       await reGetAllWriter();
     } catch (error) {
       submit.current.disabled = false;
-      const { data } = error.response;
-      setMessage(data.message | data);
+      if (error.response) {
+        const { data } = error.response;
+        if (data.message === "قم بتسجيل الدخول اولا") {
+          window.location = "/writer/login";
+        }
+        setMessage(data.message | data);
+      } else {
+        setMessage("حدثت مشكلة ");
+      }
     }
   };
 
@@ -116,6 +125,12 @@ export default function Home() {
       const { data } = await UploadImage(Data);
       return setwriter_Image(data.imageUrl);
     } catch (error) {
+      if (error.response) {
+        const { data } = error.response;
+        if (data.message === "قم بتسجيل الدخول اولا") {
+          window.location = "/writer/login";
+        }
+      }
       return console.log({ error });
     }
   };
@@ -249,8 +264,15 @@ export default function Home() {
                                 e.target.disabled === false;
                                 await reGetAllWriter();
                               } catch (error) {
-                                const { data } = error.response;
-                                setMessage(data.message);
+                                if (error.response) {
+                                  const { data } = error.response;
+                                  setMessage(data.message);
+                                  if (
+                                    data.message === "قم بتسجيل الدخول اولا"
+                                  ) {
+                                    window.location = "/writer/login";
+                                  }
+                                }
                                 e.target.disabled === false;
                               }
                             }}

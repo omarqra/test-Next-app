@@ -1,5 +1,7 @@
 .adminMain {
   display: flex;
+  padding: 10px;
+
   .message {
     text-align: center;
     width: 100%;
@@ -135,6 +137,16 @@
             }
           }
         }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .adminMain {
+    table {
+      th {
+        font-size: smaller !important;
       }
     }
   }

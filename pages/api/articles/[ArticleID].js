@@ -33,6 +33,8 @@ const apiRoute = connect()
   .put(async (req, res) => {
     const { ArticleID } = req.query;
     const { imageurl } = req.body;
+    const writer = req.writer;
+
     try {
       const allKeys = [
         "title",
@@ -58,8 +60,13 @@ const apiRoute = connect()
           .json({ message: `ليس هنالك اي معلومات لتعديل المقال` });
       }
 
-      await Articles.update({ ArticleID }, article_Update_Data);
-      return res.status(200).json({ message: `تم تعديل المقال` });
+      const article = await Articles.find({ selectors: { ArticleID } });
+      if (article[0].writer === writer) {
+        await Articles.update({ ArticleID }, article_Update_Data);
+        return res.status(200).json({ message: `تم تعديل المقال` });
+      } else {
+        return res.status(403).json({ message: `لايمكنك حذف هذا المقال` });
+      }
     } catch (error) {
       console.log({ error });
       return res.status(500).json({ message: `حدثت مشكلة اثناء تعديل المقال` });

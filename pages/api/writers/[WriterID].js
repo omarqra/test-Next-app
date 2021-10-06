@@ -2,6 +2,7 @@ import Writers from "../../../db/writers";
 import connect from "../../../middleware/connect";
 import bcrypt from "bcrypt";
 import { adminAuth } from "../../../middleware/auth";
+import Articles from "../../../db/articles";
 
 const apiRoute = connect()
   .use(adminAuth)
@@ -41,6 +42,14 @@ const apiRoute = connect()
       if (writer_password && writer_password !== "") {
         const hashedpassword = await bcrypt.hash(writer_password, 12);
         update.password = hashedpassword;
+      }
+      const theWriter = await Writers.find({ selectors: { WriterID } });
+
+      if (update.name) {
+        await Articles.update(
+          { writer: theWriter[0].name },
+          { writer: update.name }
+        );
       }
       await Writers.update({ WriterID }, update);
       return res.status(200).json({ message: `تم تعديل الكاتب` });

@@ -94,8 +94,14 @@ export default function ADD() {
         },
       });
     } catch (error) {
-      console.log(error);
-      return;
+      if (error.response) {
+        const { data } = error.response;
+        if (data.message === "قم بتسجيل الدخول اولا") {
+          window.location = "/writer/login";
+        }
+      } else {
+        setMessage("مشكلة في رفع الصورة");
+      }
     }
   };
 
@@ -467,13 +473,13 @@ export default function ADD() {
                     SectionID: section,
                   });
                   setMessage(data.message, "good");
-                  return router.push("/writer");
+                  return router.push("/writer/articles/update");
                 } catch (error) {
                   if (error.response) {
                     const { data } = error.response;
                     setMessage(data.message);
                   } else {
-                    setMessage("حصلت مشكلة اثناء التعديل");
+                    setMessage("حصلت مشكلة اثناء النشر");
                   }
                   e.target.innerHTML = "مشكلة ...";
                   e.target.disabled = false;

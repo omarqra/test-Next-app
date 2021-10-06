@@ -2,7 +2,14 @@ import React, { useEffect, useState } from "react";
 import style from "./sidebar.module.scss";
 import { FaLock, FaBars } from "react-icons/fa";
 import Link from "next/link";
-import { FaHome, FaPlus, FaTools, FaUserTie } from "react-icons/fa";
+import {
+  FaHome,
+  FaPlus,
+  FaTools,
+  FaUserTie,
+  FaSignOutAlt,
+  FaThLarge,
+} from "react-icons/fa";
 
 const SideBare = () => {
   const [admin, setadmin] = useState(false);
@@ -57,7 +64,7 @@ const SideBare = () => {
             <li>
               <Link href="/writer/sections">
                 <a>
-                  <FaUserTie /> - صفحة الاقسام
+                  <FaThLarge /> - صفحة الاقسام
                 </a>
               </Link>
             </li>
@@ -75,6 +82,16 @@ const SideBare = () => {
                 <FaTools /> - تعديل او حذف مقال
               </a>
             </Link>
+          </li>
+          <li>
+            <button
+              onClick={() => {
+                localStorage.clear();
+                window.location.replace("/writer/login");
+              }}
+            >
+              <FaSignOutAlt /> - تسجيل الخروج
+            </button>
           </li>
         </ul>
       </aside>
