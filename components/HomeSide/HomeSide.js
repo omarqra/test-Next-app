@@ -1,8 +1,8 @@
 import Link from "next/link";
 import classes from "./HomeSide.module.css";
-import image_1 from "../../public/facebook.png";
-import image_2 from "../../public/instagram.jpg";
-import image_3 from "../../public/twitter.jpg";
+import image_1 from "../../public/facebook.svg";
+import image_2 from "../../public/instagram.svg";
+import image_3 from "../../public/twittar.svg";
 const HomeSide = () => {
   return (
     <div className={classes.homeSide}>

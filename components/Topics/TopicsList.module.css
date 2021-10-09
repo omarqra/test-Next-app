@@ -1,19 +1,24 @@
 .topicsList {
-    list-style: none;
-    padding: 0;
-    /* display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    row-gap: 20px; */
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  row-gap: 20px;
 }
 /* .topicsList li {
     width: 100%;
     max-width: 374px;
 } */
+.topicsList li:first-of-type div {
+  margin-top: 0;
+}
+.topicsList li:last-of-type div {
+  margin-bottom: 0;
+}
 @media screen and (min-width: 1024px) {
-    .topicsList {
-        margin: 50px 0px;
-        display: inline-block;
-        width: 73%;
-    }
+  .topicsList {
+    display: inline-block;
+    flex: 3;
+  }
 }

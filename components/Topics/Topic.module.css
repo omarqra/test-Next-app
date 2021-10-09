@@ -1,104 +1,103 @@
 .divCard * {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 .divCard {
-    padding: 20px 15px;
-    margin: 2vh 0;
-    background-color: white;
+  padding: 20px 15px;
+  margin: 15px 0;
+  background-color: white;
 }
 .addedAt {
-    color: #555;
-    font-size: 11px;
+  color: #555;
+  font-size: medium;
 }
 
 .cardImage {
-    width: 100%;
-    height: 130px;
+  width: 100%;
+  height: 130px;
 }
 .divDetails {
-    text-align: center;
+  text-align: center;
 }
 .cardHeader {
-    padding: 10px 0;
-    font-size: medium;
+  padding: 10px 0;
+  font-size: medium;
 }
 .cardMore {
-    display: inline-block;
-    width: 100%;
-    padding: 8px 0;
-    background-color: #CF2E2E;
-    color: white;
-    font-size: 13px;
-    transition: background-color .5s ;
+  display: inline-block;
+  width: 100%;
+  padding: 8px 0;
+  background-color: #cf2e2e;
+  color: white;
+  font-size: 13px;
+  transition: background-color 0.5s;
 }
 .cardMore:hover {
-    background-color: #d44;
+  background-color: #d44;
 }
 /* DivCardImg */
 
-
 @media screen and (min-width: 411px) {
-    .divCard{ 
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    .cardImage {
-        display: block;
-        width: 200px;
-        height: 150px;
-    }
-    .divDetails{
-        direction: ltr;
-        height: 131px;
-        width: 100%;
-        display: flex;
-        padding-right: 10px;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-    .divCardHeader {
-        overflow: hidden;
-        flex-grow: 1;
-        position: relative;
-    }
-    .cardHeader {
-        font-size: 15px;
-        width: 100%;
-        position:absolute;
-        top: 50%;
-        left:50%;
-        transform: translate(-50%,-50%);
-    }
-    .cardMore {
-        width: 150px;
-    }
+  .divCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .cardImage {
+    display: block;
+    width: 200px;
+    height: 150px;
+  }
+  .divDetails {
+    direction: ltr;
+    height: 131px;
+    width: 100%;
+    display: flex;
+    padding-right: 10px;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .divCardHeader {
+    overflow: hidden;
+    flex-grow: 1;
+    position: relative;
+  }
+  .cardHeader {
+    font-size: 15px;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .cardMore {
+    width: 150px;
+  }
 }
 
 @media screen and (min-width: 768px) {
-    .cardImage {
-        width: 300px;
-        height: 200px;
-    }
-    .cardHeader {
-        font-size: 20px;
-    }
-    .divDetails {
-        padding: 0 10px 0 30px;
-    }
+  .cardImage {
+    width: 300px;
+    height: 200px;
+  }
+  .cardHeader {
+    font-size: 20px;
+  }
+  .divDetails {
+    padding: 0 10px 0 30px;
+  }
 }
 
 @media screen and (min-width: 1024px) {
-    .cardHeader {
-        font-size: 22px;
-        bottom: -60px;
-    }
-    .divDetails {
-        padding-right: 10px;
-        margin-left: 50px;
-    }
-    .cardMore {
-        width: 200px;
-    }
+  .cardHeader {
+    font-size: 22px;
+    bottom: -60px;
+  }
+  .divDetails {
+    padding-right: 10px;
+    margin-left: 50px;
+  }
+  .cardMore {
+    width: 200px;
+  }
 }

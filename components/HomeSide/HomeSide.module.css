@@ -1,50 +1,47 @@
-.homeSide{ 
-    display: none;
-    width: 25%;
-    margin-right: 2%;
-    background-color: white;
-    position: absolute;
-    top:0;
-    bottom: 0;
+.homeSide {
+  display: none;
+  flex: 1;
+  background-color: white;
 }
 .socialList {
-    width: 80%;
-    margin: 50px auto;
+  width: 80%;
+  margin: 50px auto;
 }
 .linksList {
-    margin-top: 80px;
-    padding: 0;
+  margin-top: 80px;
+  padding: 0;
 }
-.socialList, .linksList{
-    list-style: none;
+.socialList,
+.linksList {
+  list-style: none;
 }
 .socialList li {
-    margin: 30px 0;
-    color: darkblue;
-    text-decoration: underline;
-    text-align: center;
-    line-height:30px ;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
+  margin: 30px 0;
+  color: #4b4bff;
+  text-decoration: underline;
+  text-align: center;
+  line-height: 30px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
 }
-.socialList li img{
-    width: 53px;
-    /* float: right; */
-    border-radius: 12px;
+.socialList li img {
+  width: 53px;
+  /* float: right; */
+  border-radius: 12px;
 }
 .socialList li a {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 .link {
-    display: block;
-    padding: 29px 0;
-    margin: 5px 2px;
-    background-color: #dedede;
-    text-align: center;
+  display: block;
+  padding: 14px 0;
+  margin: 5px 5px;
+  background-color: #dedede;
+  text-align: center;
 }
 @media screen and (min-width: 1024px) {
-    .homeSide{ 
-        display: inline-block;
-    }    
+  .homeSide {
+    display: inline-block;
+  }
 }
