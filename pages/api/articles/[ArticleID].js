@@ -61,7 +61,7 @@ const apiRoute = connect()
       }
 
       const article = await Articles.find({ selectors: { ArticleID } });
-      if (article[0].writer === writer) {
+      if (article[0].writer === writer || "admin") {
         await Articles.update({ ArticleID }, article_Update_Data);
         return res.status(200).json({ message: `تم تعديل المقال` });
       } else {

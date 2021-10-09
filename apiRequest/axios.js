@@ -38,3 +38,6 @@ export const addSection = (data) => API.post("sections", data);
 export const deleteSection = (SectionID) => API.delete(`sections/${SectionID}`);
 export const updateSection = (SectionID, date) =>
   API.put(`sections/${SectionID}`, date);
+
+export const get_recent_Article = (M) =>
+  API.get(`/client/articles${M ? "?M=" + M : ""}`);

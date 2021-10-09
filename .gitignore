@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+images
 
 # testing
 /coverage
@@ -33,3 +34,4 @@ yarn-error.log*
 
 # vercel
 .vercel
+

@@ -33,9 +33,13 @@
   color: white;
   text-align: center;
   padding: 12px 0;
+  width: 100%;
+  outline: none;
+  border: none;
+  cursor: pointer;
 }
 .detailsLinks {
-  background-color: #0060e0;
+  background-color: #2e66cf;
 }
 .detailsLinksS {
   background-color: #cf2e2e;
@@ -46,7 +50,7 @@
   position: relative;
   display: flex;
   column-gap: 15px;
-  padding: 10px;
+  padding: 15px;
 }
 
 @media screen and (min-width: 600px) {

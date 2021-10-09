@@ -18,7 +18,7 @@ class Model {
     this.colons = colons;
     this.db = db;
   }
-  
+
   async dropTable() {
     const drop = async () => {
       try {
@@ -115,7 +115,23 @@ class Model {
     return result;
   }
 
-  async find({ selectors, columns } = "noParams") {
+  async find(
+    {
+      selectors /*Object*/,
+      columns /*String*/,
+      limit /* {max: Nuber , min: Number} */,
+      orderBy /*columns name and columns type INIT*/,
+    } = "noParams"
+  ) {
+    let S_limit = "";
+    if (limit) {
+      const { min, max } = limit;
+      S_limit = min ? ` LIMIT ${max ? min + "," + max : min} ` : "";
+    }
+    let S_ORDER_BY = "";
+    if (orderBy) {
+      S_ORDER_BY = ` ORDER BY ${orderBy} DESC `;
+    }
     if (
       typeof selectors !== "object" &&
       typeof selectors !== "string" &&
@@ -129,23 +145,32 @@ class Model {
       const selector_value = Object.values(selectors)[0];
       const selector_key = Object.keys(selectors)[0];
       const result = await this.db(
-        `SELECT ${columns || "*"} FROM ${this.table} WHERE ${selector_key} = ?`,
+        `SELECT ${columns || "*"} FROM ${this.table} WHERE ${selector_key} = ?${
+          S_ORDER_BY + S_limit
+        }`,
         selector_value
       );
       return result;
     } else if (!selectors) {
       const result = await this.db(
-        `SELECT ${columns || "*"} FROM ${this.table}`
+        `SELECT ${columns || "*"} FROM ${this.table} ${S_ORDER_BY + S_limit}`
       );
 
       return result;
     } else if (typeof selectors === "string") {
       const result = await this.db(
-        `SELECT ${columns || "*"} FROM ${this.table} WHERE ${selectors}`
+        `SELECT ${columns || "*"} FROM ${this.table} WHERE ${selectors} ${
+          S_ORDER_BY + S_limit
+        }`
       );
       return result;
     }
   }
+
+  mohamed = {
+    nana: "nas",
+    baba: "nas",
+  };
 }
 
 export default Model;
