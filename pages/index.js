@@ -121,7 +121,7 @@ const Home = () => {
         <p className={classes.PrgOnImg}>اعرف أكثر عن المشروع</p>
       </div>
 
-      <span className={classes.detailsLinks}>الأكثر زيارة</span>
+      <span className={classes.header}>الأكثر زيارة</span>
 
       <div className={classes.homeSideAndTopics}>
         <TopicsList topics={topics} />
@@ -146,7 +146,7 @@ const Home = () => {
             console.log(error);
           }
         }}
-        className={classes.detailsLinks}
+        className={classes.MoreLink}
       >
         المزيد
       </button>

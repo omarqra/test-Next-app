@@ -16,14 +16,10 @@ const Topic = (props) => {
           />
         </div>
       </div>
-      <div className={classes.divDetails}>
-        <div className={classes.divCardHeader}>
-          <h3 className={classes.cardHeader}>{topicData.title}</h3>
-        </div>
-        <Link href="/">
-          <a className={classes.cardMore}>اقرأ الآن</a>
-        </Link>
-      </div>
+      <h3 className={classes.cardHeader}>{topicData.title}</h3>
+      <Link href="/">
+        <a className={classes.cardMore}>اقرأ الآن</a>
+      </Link>
     </div>
   );
 };

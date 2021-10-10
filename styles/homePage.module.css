@@ -1,6 +1,9 @@
 .homePackgroundDiv {
   position: relative;
 }
+.button {
+  cursor: pointer;
+}
 .homePackground {
   margin: 20px 0 30px 0;
   width: 100%;
@@ -25,8 +28,8 @@
 .PrgOnImg:hover {
   background-color: #d44;
 }
-.detailsLinks,
-.detailsLinksS {
+.MoreLink,
+.header {
   font-size: large;
   display: block;
   margin: auto;
@@ -36,14 +39,10 @@
   width: 100%;
   outline: none;
   border: none;
-  cursor: pointer;
-}
-.detailsLinks {
   background-color: #2e66cf;
 }
-.detailsLinksS {
-  background-color: #cf2e2e;
-  margin: 20px 0;
+.MoreLink {
+  cursor: pointer;
 }
 
 .homeSideAndTopics {

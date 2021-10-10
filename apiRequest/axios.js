@@ -1,5 +1,5 @@
 import axios from "axios";
-
+const url = "http://localhost:3000";
 const API = axios.create({ baseURL: "/api/" });
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("token")) {
@@ -33,11 +33,15 @@ export const updatearticle = (data, articleID) =>
   API.put(`articles/${articleID}`, data);
 export const deleteArticle = (articleID) => API.delete(`articles/${articleID}`);
 
-export const getSections = () => API.get("sections");
-export const addSection = (data) => API.post("sections", data);
-export const deleteSection = (SectionID) => API.delete(`sections/${SectionID}`);
+export const getSections = () => API.get("Sections");
+export const addSection = (data) => API.post("Sections", data);
+export const deleteSection = (SectionID) => API.delete(`Sections/${SectionID}`);
 export const updateSection = (SectionID, date) =>
   API.put(`sections/${SectionID}`, date);
 
 export const get_recent_Article = (M) =>
   API.get(`/client/articles${M ? "?M=" + M : ""}`);
+export const get_all_Article_titles = () =>
+  axios.get(`${url}/api/client/allArticles`);
+export const get_one_Article = (Article_title) =>
+  axios.get(`${url}/api/client/article/${Article_title}`);

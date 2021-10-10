@@ -20,7 +20,7 @@ const apiRoute = connect()
     const writer = req.writer;
     try {
       const article = await Articles.find({ selectors: { ArticleID } });
-      if (article[0].writer === writer) {
+      if (article[0].writer === writer || "admin") {
         await Articles.delete({ ArticleID });
         return res.status(200).json({ message: `تم حذف المقال` });
       } else {

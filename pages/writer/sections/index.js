@@ -63,6 +63,7 @@ const Sections = () => {
   const regetSections = async () => {
     try {
       const { data } = await getSections();
+      console.log(data);
       setSections(data);
     } catch (error) {
       if (error.response) {
@@ -74,7 +75,7 @@ const Sections = () => {
       setMessage("مشكلة في استدعاء الاقسام");
     }
   };
-  const [Sections, setSections] = useState([]);
+  const [Allsections, setSections] = useState([]);
   useEffect(() => {
     if (!localStorage.getItem("token_1")) {
       window.location.replace("/writer/articles/update");
@@ -82,6 +83,7 @@ const Sections = () => {
     regetSections();
   }, []);
 
+  console.log(Allsections);
   const [update, setUpdate] = useState(false);
 
   return (
@@ -136,9 +138,9 @@ const Sections = () => {
             </tr>
           </thead>
           <tbody>
-            {Sections &&
-              typeof Sections === "object" &&
-              Sections.map((s) => {
+            {Allsections &&
+              typeof Allsections === "object" &&
+              Allsections.map((s) => {
                 return (
                   <tr key={s.SectionID}>
                     <th>{s.SectionID}</th>

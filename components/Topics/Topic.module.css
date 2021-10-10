@@ -1,11 +1,18 @@
 .divCard * {
   padding: 0;
   margin: 0;
+  text-align: center;
 }
 .divCard {
   padding: 20px 15px;
-  /* margin: 15px 0; */
   background-color: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  align-items: center;
+  /* margin: 15px 0; */
 }
 .addedAt {
   color: #555;
@@ -15,7 +22,7 @@
 .image {
   width: 100%;
   height: auto;
-  max-height: 200px;
+  max-height: 150px;
   overflow: hidden;
   display: flex;
   align-items: center;
