@@ -111,46 +111,47 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
-      <div className={classes.homePackgroundDiv}>
+    <main className={classes.main}>
+      <section className={classes.homePackgroundDiv}>
         <img
           className={classes.homePackground}
           src={homebg.src}
           alt="home image"
         />
         <p className={classes.PrgOnImg}>اعرف أكثر عن المشروع</p>
-      </div>
+      </section>
 
-      <span className={classes.header}>الأكثر زيارة</span>
+      <section className={classes.secandSection}>
+        <span className={classes.header}>الأكثر زيارة</span>
 
-      <div className={classes.homeSideAndTopics}>
-        <TopicsList topics={topics} />
-        <HomeSide />
-      </div>
+        <div className={classes.homeSideAndTopics}>
+          <TopicsList topics={topics} />
+          <HomeSide />
+        </div>
 
-      <button
-        onClick={async (e) => {
-          try {
-            console.log(e.target.innerHTML);
-            e.target.disabled = true;
-            e.target.innerHTML = "جاري التحميل ...";
+        <button
+          onClick={async (e) => {
+            try {
+              e.target.disabled = true;
+              e.target.innerHTML = "جاري التحميل ...";
 
-            const { data } = await get_recent_Article(topics.length);
-            settopics([...topics, ...data]);
-            e.target.disabled = false;
-            e.target.innerHTML = "المزيد";
-          } catch (error) {
-            e.target.innerHTML = "مشكلة في التحميل";
-            e.target.disabled = false;
+              const { data } = await get_recent_Article(topics.length);
+              settopics([...topics, ...data]);
+              e.target.disabled = false;
+              e.target.innerHTML = "المزيد";
+            } catch (error) {
+              e.target.innerHTML = "مشكلة في التحميل";
+              e.target.disabled = false;
 
-            console.log(error);
-          }
-        }}
-        className={classes.MoreLink}
-      >
-        المزيد
-      </button>
-    </div>
+              console.log(error);
+            }
+          }}
+          className={classes.MoreLink}
+        >
+          المزيد
+        </button>
+      </section>
+    </main>
   );
 };
 

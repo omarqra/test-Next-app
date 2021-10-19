@@ -14,6 +14,7 @@
   align-items: center;
   /* margin: 15px 0; */
 }
+
 .addedAt {
   color: #555;
   font-size: xx-small;
@@ -51,6 +52,7 @@
 .cardMore:hover {
   background-color: #d44;
 }
+
 /* DivCardImg */
 
 /* @media screen and (min-width: 411px) {

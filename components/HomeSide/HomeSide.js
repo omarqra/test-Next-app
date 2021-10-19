@@ -5,7 +5,7 @@ import image_2 from "../../public/instagram.svg";
 import image_3 from "../../public/twittar.svg";
 const HomeSide = () => {
   return (
-    <div className={classes.homeSide}>
+    <aside className={classes.homeSide}>
       <ul className={classes.socialList}>
         <li>
           <img src={image_1.src} alt="facebook" />
@@ -31,27 +31,27 @@ const HomeSide = () => {
       </ul>
       <ul className={classes.linksList}>
         <li>
-          <Link href="/">
+          <Link href="/about">
             <a className={classes.link}>من نحن</a>
           </Link>
         </li>
         <li>
-          <Link href="/">
+          <Link href="/about">
             <a className={classes.link}>سياسة الخصوصية</a>
           </Link>
         </li>
         <li>
-          <Link href="/">
+          <Link href="/about">
             <a className={classes.link}>شروط الاستخدام</a>
           </Link>
         </li>
         <li>
-          <Link href="/">
+          <Link href="/about">
             <a className={classes.link}>اتصل بنا</a>
           </Link>
         </li>
       </ul>
-    </div>
+    </aside>
   );
 };
 

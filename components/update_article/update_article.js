@@ -144,13 +144,13 @@ export default function Update_article({ article, setMessage, Sections }) {
       str1 = str1.replace(/[ ]{2,}/gi, " ");
       str1 = str1.replace(/\n /, "\n");
 
-      const world_With_Space = str1.split(" ");
+      const reg = new RegExp(keyword.trim(), "g");
+      const world_With_Space = str1.replace(reg, "keyword").split(" ");
       const count = world_With_Space.length;
       if (count !== contentWorlds) setcontentWorlds(count);
-
       if (keyword !== "") {
         keyWorld_count = world_With_Space.filter(
-          (item) => item === keyword
+          (item) => item === "keyword"
         ).length;
         keyWorld_density = Math.round((keyWorld_count / contentWorlds) * 100);
       } else {

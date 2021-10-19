@@ -1,6 +1,7 @@
 .homePackgroundDiv {
   position: relative;
 }
+
 .button {
   cursor: pointer;
 }
@@ -29,6 +30,7 @@
   background-color: #d44;
 }
 .MoreLink,
+.header_1,
 .header {
   font-size: large;
   display: block;
@@ -40,6 +42,9 @@
   outline: none;
   border: none;
   background-color: #2e66cf;
+}
+.header_1 {
+  font-size: x-large;
 }
 .MoreLink {
   cursor: pointer;
@@ -98,3 +103,9 @@
     margin: 0 0 40px 0;
   }
 }
+
+/* @media screen and (min-width: 768px) {
+  .main {
+    margin: 0 5%;
+  }
+} */

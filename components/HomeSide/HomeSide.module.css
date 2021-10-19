@@ -1,7 +1,9 @@
 .homeSide {
+  padding-top: 75px;
   display: none;
   flex: 1;
   background-color: white;
+  box-shadow: 5px 0 5px -3px #c4c4c4;
 }
 .socialList {
   width: 80%;

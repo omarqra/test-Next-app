@@ -11,6 +11,10 @@ const Articles = new Model(
     description ${constaint.Datatype.VARCHAR(255) + constaint.NOT_NULL},
     writer ${constaint.Datatype.VARCHAR() + constaint.NOT_NULL},
     SectionID ${constaint.Datatype.INT + constaint.NOT_NULL},
+    visitors ${constaint.Datatype.INT + constaint.DEFAULT + " " + 0},
+    date ${
+      constaint.Datatype.TIMESTAMP + constaint.DEFAULT + " CURRENT_TIMESTAMP"
+    },
     ${constaint.PRIMARY_KEY} (ArticleID)`,
   db
 );
