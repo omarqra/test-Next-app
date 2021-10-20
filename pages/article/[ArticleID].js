@@ -13,10 +13,14 @@ import { useEffect, useState } from "react";
 import ReactHtmlParser from "react-html-parser";
 import moment from "moment";
 import "moment/locale/ar";
+import Articles from "../../db/articles";
 moment.locale("ar");
 
 export async function getStaticPaths() {
-  const { data } = await get_all_Article_titles();
+  const data = await Articles.find({
+    columns: "ArticleID",
+  });
+  // const { data } = await get_all_Article_titles();
   const paths = data.map((article) => ({
     params: { ArticleID: JSON.stringify(article.ArticleID) },
   }));
@@ -24,17 +28,28 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const { data } = await get_one_Article(params.ArticleID);
+  const _data = await Articles.find({
+    columns:
+      "title , writer , htmlcontent , imageurl , description , visitors , date",
+    selectors: { ArticleID: params.ArticleID },
+  });
+  await Articles.update(
+    { ArticleID: params.ArticleID },
+    { visitors: _data[0].visitors + 1 }
+  );
+
+  // const { data } = await get_one_Article(params.ArticleID);
 
   return {
     props: {
-      data,
+      _data: JSON.stringify(_data[0]),
     },
     revalidate: 120,
   };
 }
 
-const Article = ({ data }) => {
+const Article = ({ _data }) => {
+  const data = JSON.parse(_data);
   const [topics, settopics] = useState([]);
   useEffect(() => {
     (async () => {

@@ -19,7 +19,7 @@ export default async function handler(req, res) {
   const tables = [Articles, Writers, Section];
   tables.forEach(async (table) => {
     try {
-      await table.dropTable();
+      // await table.dropTable();
       await table.creatTable();
       if (table === Writers) {
         await Writers.save({

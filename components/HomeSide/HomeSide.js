@@ -9,21 +9,21 @@ const HomeSide = () => {
       <ul className={classes.socialList}>
         <li>
           <img src={image_1.src} alt="facebook" />
-          <a href="https://www.facebook.com/" target="_blank">
+          <a href="https://www.facebook.com/" target="_blank" rel="noreferrer">
             {" "}
             @المطرجي
           </a>
         </li>
         <li>
           <img src={image_3.src} alt="facebook" />
-          <a href="https://www.twitter.com/" target="_blank">
+          <a href="https://www.twitter.com/" target="_blank" rel="noreferrer">
             {" "}
             @موقع المطرجي{" "}
           </a>
         </li>
         <li>
           <img src={image_2.src} alt="facebook" />
-          <a href="https://www.instagram.com/" target="_blank">
+          <a href="https://www.instagram.com/" target="_blank" rel="noreferrer">
             {" "}
             mutraji221@{" "}
           </a>
